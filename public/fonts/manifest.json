@@ -1,0 +1,112 @@
+{
+  "source": "@fontsource",
+  "version": "5.3.0",
+  "downloadedAt": "2026-11-03T14:10:59.639Z",
+  "files": [
+    {
+      "file": "ibm-plex-sans-latin-400-normal.woff2",
+      "family": "ibm-plex-sans",
+      "face": "400-normal",
+      "version": "5.3.0",
+      "subset": "latin",
+      "license": "SIL OFL 1.1",
+      "bytes": 22588,
+      "url": "https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans@5.3.0/files/ibm-plex-sans-latin-400-normal.woff2",
+      "sha256": "3b646991d30055a93a4ecc499713d4347953a74a947ecab435ab72070cbdab0e"
+    },
+    {
+      "file": "ibm-plex-sans-latin-400-italic.woff2",
+      "family": "ibm-plex-sans",
+      "face": "400-italic",
+      "version": "5.3.0",
+      "subset": "latin",
+      "license": "SIL OFL 1.1",
+      "bytes": 24356,
+      "url": "https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans@5.3.0/files/ibm-plex-sans-latin-400-italic.woff2",
+      "sha256": "6de912e531b6c98084f1b2d5e5a91bad77be4e68bc4e396e43c46fc435e5f3d9"
+    },
+    {
+      "file": "ibm-plex-sans-latin-500-normal.woff2",
+      "family": "ibm-plex-sans",
+      "face": "500-normal",
+      "version": "5.3.0",
+      "subset": "latin",
+      "license": "SIL OFL 1.1",
+      "bytes": 24184,
+      "url": "https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans@5.3.0/files/ibm-plex-sans-latin-500-normal.woff2",
+      "sha256": "0717336fb31fcdcde4b8deb3675bb4a0f7f6d484864afcd6751ac29975962203"
+    },
+    {
+      "file": "ibm-plex-sans-latin-600-normal.woff2",
+      "family": "ibm-plex-sans",
+      "face": "600-normal",
+      "version": "5.3.0",
+      "subset": "latin",
+      "license": "SIL OFL 1.1",
+      "bytes": 24252,
+      "url": "https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans@5.3.0/files/ibm-plex-sans-latin-600-normal.woff2",
+      "sha256": "8960851d691c054ed38e259bdcf1a6190d157b4203ed5bb32c632a863fb8ec2f"
+    },
+    {
+      "file": "ibm-plex-mono-latin-400-normal.woff2",
+      "family": "ibm-plex-mono",
+      "face": "400-normal",
+      "version": "5.3.0",
+      "subset": "latin",
+      "license": "SIL OFL 1.1",
+      "bytes": 14708,
+      "url": "https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5.3.0/files/ibm-plex-mono-latin-400-normal.woff2",
+      "sha256": "08949f728dc52d528e69b1667d15c89a5686a4ee9a296ff90983985f99c380f7"
+    },
+    {
+      "file": "ibm-plex-mono-latin-600-normal.woff2",
+      "family": "ibm-plex-mono",
+      "face": "600-normal",
+      "version": "5.3.0",
+      "subset": "latin",
+      "license": "SIL OFL 1.1",
+      "bytes": 15620,
+      "url": "https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5.3.0/files/ibm-plex-mono-latin-600-normal.woff2",
+      "sha256": "0d1f0b8d0722224e32e9f28261bdc86c79115be73444ae5eceb73976a1bcdf83"
+    },
+    {
+      "file": "ibm-plex-sans-condensed-latin-500-normal.woff2",
+      "family": "ibm-plex-sans-condensed",
+      "face": "500-normal",
+      "version": "5.3.0",
+      "subset": "latin",
+      "license": "SIL OFL 1.1",
+      "bytes": 19952,
+      "url": "https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans-condensed@5.3.0/files/ibm-plex-sans-condensed-latin-500-normal.woff2",
+      "sha256": "e3b4fd97fd20bc70fda66d8d5f0745d8d6958068a024cb4724bbc1ffb6cbc183"
+    },
+    {
+      "file": "ibm-plex-sans-condensed-latin-600-normal.woff2",
+      "family": "ibm-plex-sans-condensed",
+      "face": "600-normal",
+      "version": "5.3.0",
+      "subset": "latin",
+      "license": "SIL OFL 1.1",
+      "bytes": 19816,
+      "url": "https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans-condensed@5.3.0/files/ibm-plex-sans-condensed-latin-600-normal.woff2",
+      "sha256": "3d72a0923c5830358b0a8e25b258aecadbecbf542b6ee9a25f387803e37d56b9"
+    }
+  ],
+  "licenses": [
+    {
+      "family": "ibm-plex-sans",
+      "url": "https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans@5.3.0/LICENSE",
+      "sha256": "d0283623ef57e722fd0eb688a8041589670c608ab780cd3612d06ba6f153d3fd"
+    },
+    {
+      "family": "ibm-plex-mono",
+      "url": "https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5.3.0/LICENSE",
+      "sha256": "23b0a9d0c6d3f140a0b77e483c5cfa6bba574325ef5cb189ed9f2fec4884533f"
+    },
+    {
+      "family": "ibm-plex-sans-condensed",
+      "url": "https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans-condensed@5.3.0/LICENSE",
+      "sha256": "251faa58c24c53a1855818116292bf449d591937cf5143fafc23e0be5e26ddc6"
+    }
+  ]
+}

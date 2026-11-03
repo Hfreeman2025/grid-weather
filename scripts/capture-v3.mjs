@@ -1,6 +1,7 @@
 import{launch,session,archive}from'./browser-kit.mjs';import{mkdir,writeFile,readFile}from'node:fs/promises';import assert from'node:assert/strict';
 import{parseArchive}from'../src/data.ts';import{checkEvidence}from'./evidence-check.mjs';
-const pass=process.argv.find(a=>a.startsWith('--pass='))?.split('=')[1]??'1',root=`shots/v3/pass-${pass}`;
+const pass=process.argv.find(a=>a.startsWith('--pass='))?.split('=')[1]??'1',root=process.argv.find(a=>a.startsWith('--root='))?.split('=')[1]??`shots/v3/pass-${pass}`;
+if(!/^shots\/[A-Za-z0-9/_-]+$/.test(root))throw new Error('Invalid screenshot root');
 await mkdir(root,{recursive:true});const browser=await launch('chromium',{gpu:true});const model=parseArchive(archive,'offline');const report={pass,fixtureCapturedAt:archive.fetchedAt,notes:'Genuine API replay at its captured date; only Date is fixed. Native timers and rendering remain real.',shots:[],errors:[],warnings:[],checks:[],observations:{}};
 
 async function shot(s,name,width,full=false){const path=`${root}/${width}-${name}.png`;await s.page.screenshot({path,fullPage:full});report.shots.push(path);}

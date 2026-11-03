@@ -82,3 +82,8 @@ Final browser results, native timings, both critique passes and screenshots are 
 - TypeScript 5.9.3: development-only, Apache-2.0. **Zero runtime packages, zero pretrained-weight downloads.** No shared model-weight file is needed. [DEPENDENCIES.md](DEPENDENCIES.md) records tools and data.
 
 Local only. No private data, accounts, commits, pushes or publishing.
+
+
+## Typeface
+
+IBM Plex Sans is the reading/interface face, Mono carries numerical data and code, and Sans Condensed signs the broadcast. Eight latin WOFF2 faces from @fontsource5.3.0 are served locally with `font-display:swap`; the three main faces are preloaded. There are no runtime Google Fonts requests. Original per-family SIL OFL1.1 licences and a URL/size/SHA-256 manifest are in `public/fonts/`. This is the later approved typography change; the V3 source-data and model behavior are unchanged.
