@@ -1,0 +1,5 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {areaWeather} from '../src/area-weather.ts';
+const grid={nx:2,ny:2,x0:0,y0:0,step:100,times:[0],frames:[[...Array(6).fill(0),...Array(6).fill(20),...Array(6).fill(0),...Array(6).fill(20)]],height:100,capturedAt:0,source:'Test'};
+const rect=(id,x1,x2)=>({id,name:'Test',label:[0,0],rings:[[[x1+10,1240],[x2+10,1240],[x2+10,1140],[x1+10,1140],[x1+10,1240]]]});
+test('area mean uses many equal-area interior cells rather than a centroid or vector magnitude',()=>{const a=areaWeather(grid,[rect(1,0,50),rect(2,50,100)],10);assert.equal(a.cells[1],50);assert.equal(a.cells[2],50);assert.ok(Math.abs(a.rows[0].regions[0].values[0]-5)<1e-10);assert.ok(Math.abs(a.rows[0].regions[1].values[0]-15)<1e-10);});
+test('polygon holes do not contribute and incomplete weather coverage fails visibly',()=>{const b=rect(1,0,100);b.rings.push(rect(1,0,50).rings[0]);const a=areaWeather(grid,[b],10);assert.equal(a.cells[1],50);assert.throws(()=>areaWeather(grid,[rect(2,200,300)],10),/coverage/);});

@@ -1,0 +1,51 @@
+# Dependencies, build output and local caches
+node_modules/
+dist/
+dist-*/
+build/
+coverage/
+.cache/
+*.tsbuildinfo
+
+# Temporary files and browser state
+tmp/
+temp/
+.tmp/
+playwright-report/
+test-results/
+browser-profiles/
+profiles/
+user-data/
+*.har
+*.log
+.DS_Store
+
+# Credentials, secrets and personal agent state
+.env*
+keys/
+secrets/
+credentials/
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+.claude/
+.codex/
+transcripts/
+sessions/
+*.jsonl
+
+# Model weights belong in shared storage, never this repository
+.models/
+models/
+weights/
+*.onnx
+*.onnx_data
+*.safetensors
+*.gguf
+*.pt
+*.pth
+*.tflite
+*.bin

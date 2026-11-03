@@ -1,0 +1,6 @@
+{
+  "source": "https://api.neso.energy/dataset/0e377f16-95e9-4c15-a1fc-49e06a39cfa0/resource/1c6a7dc0-1b6c-443a-bc67-5f7125649434/download/gb-dno-license-areas-20240503-as-geojson.geojson",
+  "toleranceMetres": 650,
+  "before": 59707,
+  "after": 5047
+}

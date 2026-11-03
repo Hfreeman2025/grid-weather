@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Carbon Intensity API</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+      .content {
+      max-width: 500px;
+      margin: auto;
+      }
+      body {
+      color: #333;
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 500px;
+      margin: auto;
+      }
+      a:link {
+      color: #2980B9;
+      text-decoration: none;
+      }
+      a:visited {
+      color: #2980B9;
+      }
+      a:hover {
+      color: #AED6F1;
+      text-decoration: none;
+      }
+      a:active {
+      color: #2980B9;
+      text-decoration: underline;
+      }
+      #rcorners1 {
+      border-radius: 3px;
+      background: #239B56;
+      padding: 3px;   
+      }
+      header > h1 { 
+      display: inline-block; 
+      }
+      header span { 
+      margin-left: 10px; 
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <br/>
+      <header>
+      <h1 style="color: #1F618D;" style="font-family:arial;"><b>Carbon Intensity API<sup><span style="color: grey;"><small>Great Britain</small></span></sup></b></h1>
+        
+      </header>
+      <h4><span style="color: #34495E;"><b>Introduction</b></span></h4>
+      <p>This is the Official Carbon Intensity API for Great Britain developed by <a href="https://www.nationalenergyso.com">National Energy System Operator</a>. You can find out more about carbon intensity at <a href="http://carbonintensity.org.uk/">carbonintensity.org.uk</a>.</p>
+      
+      
+      
+      <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions'">documentation</button>
+      <hr>
+      <h2><span style="color: #1F618D;" style="font-family:arial;"><b>API Quick Start</b></span></h2>
+      <p>Base URL: <a href="https://api.carbonintensity.org.uk/">api.carbonintensity.org.uk</a></p>
+      <h3><span style="color: #1F618D;" style="font-family:arial;"><b>JSON</b></span></h3>
+      <h4><span style="color: #34495E;"><b>Carbon Intensity - National</b></span></h4>
+      <p>
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/intensity">/intensity</a> 
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-intensity'">docs</button>
+        <span style="color: grey;"><small><br/>gets current carbon intensity</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/intensity/date">/intensity/date</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-intensity-date'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity for today</small></span> <br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/intensity/date/2017-10-01">/intensity/date/{date}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-intensity-date-date'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity for specified date</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/intensity/date/2017-10-01/24">/intensity/date/{date}/{period}</a> 
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-intensity-date-date-period'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity for specified date and settlement period</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/intensity/factors">/intensity/factors</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-intensity-factors'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity factors for fuel types</small></span> <br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/intensity/2017-10-01T12:00Z">/intensity/{from}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-intensity-from'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity for specified datetime</small></span><br/><br/>
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/intensity/2017-10-01T12:00Z/fw24h">/intensity/{from}/fw24h</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-intensity-from-fw24h'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity for 24h after specified datetime</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/intensity/2017-10-01T12:00Z/fw48h">/intensity/{from}/fw48h</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-intensity-from-fw48h'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity for 48h after specified datetime</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/intensity/2017-10-01T12:00Z/pt24h">/intensity/{from}/pt24h</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-intensity-from-pt24h'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity for 24h before specified datetime</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/intensity/2017-09-18T12:00Z/2017-10-01T12:00Z">/intensity/{from}/{to}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-intensity-from-to'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity between specified datetimes</small></span><br/><br/>
+      </p>
+      <h4><span style="color: #34495E;" style="font-family:arial;"><b>Statistics - National</b></span></h4>
+      <p>
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/intensity/stats/2017-09-18T12:00Z/2017-10-01T12:00Z">/intensity/stats/{from}/{to}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-intensity-stats-from-to'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity statistics between specified datetimes</small></span><br/><br/>
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/intensity/stats/2017-09-18T12:00Z/2017-10-01T12:00Z/2">/intensity/stats/{from}/{to}/{block}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-intensity-stats-from-to-block'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity statistics in blocks between specified datetimes</small></span><br/><br/>
+      </p>
+      <h4><span style="color: ;" style="font-family:arial;"><b>Generation Mix - National</b></span><sup><small><span style="color: #00cc00;">beta</span></small></sup></h4>
+      <p>
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/generation">/generation</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-generation'">docs</button>
+        <span style="color: grey;"><small><br/>gets current generation mix</small></span><br/><br/>
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/generation/2018-05-15T12:00Z/pt24h">/generation/{from}/pt24h</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-generation-from-pt24h'">docs</button>
+        <span style="color: grey;"><small><br/>gets generation mix for 24h before specified datetime</small></span><br/><br/>
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/generation/2018-05-15T12:00Z/2018-05-16T12:00Z">/generation/{from}/{to}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-generation-from-to'">docs</button>
+        <span style="color: grey;"><small><br/>gets generation mix between specified datetimes</small></span><br/><br/>
+      </p>
+      <h4><span style="color: #34495E;" style="font-family:arial;"><b>Carbon Intensity - Regional</b></span><sup><small><span style="color: #00cc00;">beta</span></small></sup></h4>
+      <p>
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional">/regional</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional'">docs</button>
+        <span style="color: grey;"><small><br/>gets current carbon intensity for GB regions</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/england">/regional/england</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-england'">docs</button>
+        <span style="color: grey;"><small><br/>gets current carbon intensity for England</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/scotland">/regional/scotland</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-scotland'">docs</button>
+        <span style="color: grey;"><small><br/>gets current carbon intensity for Scotland</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/wales">/regional/wales</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-wales'">docs</button>
+        <span style="color: grey;"><small><br/>gets current carbon intensity for Wales</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/postcode/RG10">/regional/postcode/{postcode}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-postcode-postcode'">docs</button>
+        <span style="color: grey;"><small><br/>gets current carbon intensity for specified outward postcode</small></span><br/><br/>
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/regionid/1">/regional/regionid/{regionid}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-regionid-regionid'">docs</button>
+        <span style="color: grey;"><small><br/>gets current carbon intensity for specified region</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/intensity/2018-05-15T12:00Z/fw24h">/regional/intensity/{from}/fw24h</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-intensity-from-fw24h'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity for 24h after specified datetime for GB regions</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/intensity/2018-05-15T12:00Z/fw24h/postcode/RG10">/regional/intensity/{from}/fw24h/postcode/{postcode}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-intensity-from-fw24h-postcode-postcode'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity for 24h after specified datetime for specified outward postcode</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/intensity/2018-05-15T12:00Z/fw24h/regionid/1">/regional/intensity/{from}/fw24h/regionid/{regionid}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-intensity-from-fw24h-regionid-regionid'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity for 24h after specified datetime for specified region</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/intensity/2018-05-15T12:00Z/fw48h">/regional/intensity/{from}/fw48h</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-intensity-from-fw48h'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity for 48h after specified datetime for GB regions</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/intensity/2018-05-15T12:00Z/fw48h/postcode/RG10">/regional/intensity/{from}/fw48h/postcode/{postcode}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-intensity-from-fw48h-postcode-postcode'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity for 48h after specified datetime for specified outward postcode</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/intensity/2018-05-15T12:00Z/fw48h/regionid/1">/regional/intensity/{from}/fw48h/regionid/{regionid}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-intensity-from-fw48h-regionid-regionid'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity for 48h after specified datetime for specified region</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/intensity/2018-05-15T12:00Z/pt24h">/regional/intensity/{from}/pt24h</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-intensity-from-pt24h'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity for 24h before specified datetime for GB regions</small></span><br/><br/>
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/intensity/2018-05-15T12:00Z/pt24h/postcode/RG10">/regional/intensity/{from}/pt24h/postcode/{postcode}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-intensity-from-pt24h-postcode-postcode'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity for 24h before specified datetime for specified outward postcode</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/intensity/2018-05-15T12:00Z/pt24h/regionid/1">/regional/intensity/{from}/pt24h/regionid/{regionid}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-intensity-from-pt24h-regionid-regionid'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity for 24h before specified datetime for specified region</small></span><br/><br/>
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/intensity/2018-05-15T12:00Z/2018-05-16T12:00Z">/regional/intensity/{from}/{to}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-intensity-from-to'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity between specified datetimes for GB regions</small></span><br/><br/>
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/intensity/2018-05-15T12:00Z/2018-05-16T12:00Z/postcode/RG10">/regional/intensity/{from}/{to}/postcode/{postcode}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-intensity-from-to-postcode-postcode'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity between specified datetimes for specified outward postcode</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/regional/intensity/2018-05-15T12:00Z/2018-05-16T12:00Z/regionid/1">/regional/intensity/{from}/{to}/regionid/{regionid}</a>
+        <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://carbon-intensity.github.io/api-definitions/#get-regional-intensity-from-to-regionid-regionid'">docs</button>
+        <span style="color: grey;"><small><br/>gets carbon intensity between specified datetimes for specified region</small></span><br/><br/>
+      </p>
+      <hr>
+      <h3><span style="color: #1F618D;" style="font-family:arial;"><b>XML</b></span></h3>
+      <h4><span style="color: #34495E;" style="font-family:arial;"><b>Carbon Intensity - National</b></span></h4>
+      <p>
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/xml/intensity">/xml/intensity</a> <span style="color: grey;"><small><br/>
+        gets current carbon intensity</small></span> <br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/xml/intensity/date">/xml/intensity/date</a> <span style="color: grey;"><small><br/>gets carbon intensity for today</small></span> <br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/xml/intensity/date/2017-10-01">/xml/intensity/date/{date}</a> <span style="color: grey;"><small><br/>
+        gets carbon intensity for specified date</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/xml/intensity/date/2017-10-01/24">/xml/intensity/date/{date}/{period}</a> <span style="color: grey;"><small><br/>
+        gets carbon intensity for specified date and settlement period</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/xml/intensity/factors">/xml/intensity/factors</a> <span style="color: grey;"><small><br/>
+        gets carbon intensity factors for fuel types</small></span> <br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/xml/intensity/2017-10-01T12:00Z">/xml/intensity/{from}</a> <span style="color: grey;"><small><br/>
+        gets carbon intensity for specified datetime</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/xml/intensity/2017-10-01T12:00Z/fw24h">/xml/intensity/{from}/fw24h</a> <span style="color: grey;"><small><br/>
+        gets carbon intensity for 24h after specified datetime</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/xml/intensity/2017-10-01T12:00Z/fw48h">/xml/intensity/{from}/fw48h</a> <span style="color: grey;"><small><br/>
+        gets carbon intensity for 48h after specified datetime</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/xml/intensity/2017-10-01T12:00Z/pt24h">/xml/intensity/{from}/pt24h</a> <span style="color: grey;"><small><br/>
+        gets carbon intensity for 24h before specified datetime</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/xml/intensity/2017-09-18T12:00Z/2017-10-01T12:00Z">/xml/intensity/{from}/{to}</a> <span style="color: grey;"><small><br/>
+        gets carbon intensity between specified datetimes</small></span><br/><br/>
+      </p>
+      <h4><span style="color: #34495E;" style="font-family:arial;"><b>Statistics - National</b></span></h4>
+      <p>
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/xml/intensity/stats/2017-09-18T12:00Z/2017-10-01T12:00Z">/xml/intensity/stats/{from}/{to}</a> <span style="color: grey;"><small><br/>
+        gets carbon intensity statistics between specified datetimes</small></span><br/><br/> 
+        <span id="rcorners1"><span style="color: #FDFEFE;">GET</span></span> <a href="https://api.carbonintensity.org.uk/xml/intensity/stats/2017-09-18T12:00Z/2017-10-01T12:00Z/2">/xml/intensity/stats/{from}/{to}/{block}</a> <span style="color: grey;"><small><br/>
+        gets carbon intensity statistics in blocks between specified datetimes</small></span><br/><br/>
+      </p>
+      <h4><span style="color: #34495E;" style="font-family:arial;"><b>Region IDs</b></span></h4>
+      <p>
+        1&emsp;North Scotland<br/> 
+        2&emsp;South Scotland<br/> 
+        3&emsp;North West England<br/> 
+        4&emsp;North East England<br/> 
+        5&emsp;South Yorkshire<br/> 
+        6&emsp;North Wales, Merseyside and Cheshire<br/> 
+        7&emsp;South Wales<br/> 
+        8&emsp;West Midlands<br/> 
+        9&emsp;East Midlands<br/> 
+        10&ensp;East England<br/> 
+        11&ensp;South West England<br/> 
+        12&ensp;South England<br/> 
+        13&ensp;London<br/>
+        14&ensp;South East England<br/><br/>
+        15&ensp;England<br/> 
+        16&ensp;Scotland<br/> 
+        17&ensp;Wales<br/><br/>
+      </p>
+      <hr>
+      <h3><span style="color: #1F618D;" style="font-family:arial;"><b>How do we calculate Carbon Intensity?</b></span></h3>
+      <p>
+        You can find out how we calculate both national and regional carbon intensity in our methodology papers.</br></br>
+        Methodology: <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://www.neso.energy/data-portal/national-carbon-intensity-forecast/national_carbon_intensity_forecast_methodology'">National Forecast</button> or <button type="button" style="color: #CB4335;" class="btn btn-default btn-xs" onclick="window.location.href='https://www.neso.energy/data-portal/regional-carbon-intensity-forecast/regional_carbon_intensity_forecast_methodology'">Regional Forecast</button>
+      </p>
+      <hr>
+      <h3><span style="color: #1F618D;" style="font-family:arial;"><b>Further Information</b></span></h3>
+      <p>
+      Terms: <a href="https://github.com/carbon-intensity/terms">API Terms of Use</a><br>
+      Email: <a href="mailto:lyndon.ruff@nationalgrid.com">Lyndon Ruff</a><br>
+      License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+      </p>
+      <hr>
+      <br><br><br>
+      
+    </div>
+  </body>

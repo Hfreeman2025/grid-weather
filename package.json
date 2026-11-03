@@ -1,0 +1,31 @@
+{
+  "name": "grid-weather",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/serve.mjs",
+    "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
+    "lint": "node scripts/lint.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "npm run typecheck && npm run lint && npm test && npm run build && npm run licences",
+    "licences": "node scripts/licences.mjs",
+    "refresh:data": "node scripts/refresh-data.mjs",
+    "refresh:boundaries": "node scripts/prepare-boundaries.mjs --fetch",
+    "test:browser": "node scripts/browser-v3.mjs",
+    "refresh:v3": "node scripts/refresh-v3.mjs && node scripts/record-wind.mjs && node scripts/record-model.mjs",
+    "shots:v2": "node scripts/capture-v2.mjs --pass=2",
+    "browsers:install": "node scripts/install-browsers.mjs",
+    "preview:image": "node scripts/social-v3.mjs",
+    "shots:v3": "node scripts/capture-v3.mjs --pass=B"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  }
+}

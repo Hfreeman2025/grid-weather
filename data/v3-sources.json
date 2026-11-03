@@ -1,0 +1,291 @@
+{
+  "capturedAt": "2026-11-02T14:54:15.483Z",
+  "requests": [
+    {
+      "url": "https://api.carbonintensity.org.uk/regional",
+      "bytes": 6978,
+      "capturedAt": "2026-11-02T14:50:31.411Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.carbonintensity.org.uk/regional/intensity/2026-11-02T14:00Z/pt24h",
+      "bytes": 340766,
+      "capturedAt": "2026-11-02T14:50:35.801Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.carbonintensity.org.uk/regional/intensity/2026-11-02T14:00Z/fw48h",
+      "bytes": 673782,
+      "capturedAt": "2026-11-02T14:50:39.132Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.carbonintensity.org.uk/regional/intensity/2026-11-01T14:00Z/pt24h",
+      "bytes": 340826,
+      "capturedAt": "2026-11-02T14:50:41.031Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.carbonintensity.org.uk/regional/intensity/2026-10-31T14:00Z/pt24h",
+      "bytes": 340797,
+      "capturedAt": "2026-11-02T14:50:42.495Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.carbonintensity.org.uk/regional/intensity/2026-10-30T14:00Z/pt24h",
+      "bytes": 341166,
+      "capturedAt": "2026-11-02T14:50:43.873Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.carbonintensity.org.uk/regional/intensity/2026-10-29T14:00Z/pt24h",
+      "bytes": 340860,
+      "capturedAt": "2026-11-02T14:50:45.234Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.carbonintensity.org.uk/regional/intensity/2026-10-28T14:00Z/pt24h",
+      "bytes": 340169,
+      "capturedAt": "2026-11-02T14:50:46.678Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.carbonintensity.org.uk/regional/intensity/2026-10-27T14:00Z/pt24h",
+      "bytes": 339664,
+      "capturedAt": "2026-11-02T14:50:48.081Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.carbonintensity.org.uk/regional/intensity/2026-10-26T14:00Z/pt24h",
+      "bytes": 339982,
+      "capturedAt": "2026-11-02T14:50:49.659Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=48.1251%2C48.2814%2C48.423%2C48.5496%2C48.6611%2C48.757%2C48.8373%2C48.9017&longitude=-16.1277%2C-14.819%2C-13.4996%2C-12.1704%2C-10.8326%2C-9.4871%2C-8.1351%2C-6.7777&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 67512,
+      "capturedAt": "2026-11-02T14:50:49.822Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=48.9502%2C48.9825%2C48.9987%2C48.9988%2C48.9826%2C48.9503%2C48.9018%2C48.8374&longitude=-5.4161%2C-4.0514%2C-2.6849%2C-1.3177%2C0.0488%2C1.4135%2C2.7751%2C4.1325&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 64673,
+      "capturedAt": "2026-11-02T14:50:49.861Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=48.7572%2C48.6613%2C48.997%2C49.1581%2C49.3042%2C49.4348%2C49.5497%2C49.6487&longitude=5.4846%2C6.83%2C-16.3779%2C-15.0477%2C-13.7061%2C-12.3542%2C-10.9931%2C-9.6238&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66510,
+      "capturedAt": "2026-11-02T14:50:49.898Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=49.7315%2C49.798%2C49.848%2C49.8814%2C49.8981%2C49.8982%2C49.8815%2C49.8481&longitude=-8.2475%2C-6.8655%2C-5.479%2C-4.0892%2C-2.6975%2C-1.3052%2C0.0866%2C1.4763&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66344,
+      "capturedAt": "2026-11-02T14:50:49.934Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=49.7981%2C49.7317%2C49.6489%2C49.5499%2C49.8677%2C50.0339%2C50.1845%2C50.3192&longitude=2.8629%2C4.2449%2C5.6211%2C6.9905%2C-16.6404%2C-15.2877%2C-13.923%2C-12.5473&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 65479,
+      "capturedAt": "2026-11-02T14:50:49.975Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=50.4378%2C50.5399%2C50.6254%2C50.694%2C50.7456%2C50.7801%2C50.7974%2C50.7974&longitude=-11.1617%2C-9.7674%2C-8.3657%2C-6.9578%2C-5.5452%2C-4.129%2C-2.7108%2C-1.2919&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66544,
+      "capturedAt": "2026-11-02T14:50:50.013Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=50.7802%2C50.7457%2C50.6942%2C50.6256%2C50.5402%2C50.4381%2C50.7373%2C50.9086&longitude=0.1263%2C1.5424%2C2.9551%2C4.363%2C5.7647%2C7.159%2C-16.9159%2C-15.5399&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 65075,
+      "capturedAt": "2026-11-02T14:50:50.051Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=51.064%2C51.203%2C51.3253%2C51.4307%2C51.519%2C51.5898%2C51.6431%2C51.6787&longitude=-14.1509%2C-12.7502%2C-11.339%2C-9.9185%2C-8.49%2C-7.055%2C-5.6148%2C-4.1709&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66727,
+      "capturedAt": "2026-11-02T14:50:50.090Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=51.6965%2C51.6965%2C51.6787%2C51.6432%2C51.5899%2C51.5191%2C51.431%2C51.3256&longitude=-2.7248%2C-1.278%2C0.1681%2C1.612%2C3.0522%2C4.4872%2C5.9157%2C7.3362&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 64753,
+      "capturedAt": "2026-11-02T14:50:50.127Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=51.6055%2C51.7823%2C51.9426%2C52.086%2C52.2123%2C52.3211%2C52.4122%2C52.4853&longitude=-17.2055%2C-15.8049%2C-14.3906%2C-12.9637%2C-11.5255%2C-10.0775%2C-8.6209%2C-7.1573&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66690,
+      "capturedAt": "2026-11-02T14:50:50.168Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=52.5403%2C52.5771%2C52.5955%2C52.5955%2C52.5771%2C52.5404%2C52.4854%2C52.4123&longitude=-5.6882%2C-4.2151%2C-2.7396%2C-1.2633%2C0.2122%2C1.6853%2C3.1544%2C4.6181&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 65770,
+      "capturedAt": "2026-11-02T14:50:50.206Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=52.3213%2C52.2125%2C52.4725%2C52.6548%2C52.8202%2C52.9682%2C53.0986%2C53.2109&longitude=6.0746%2C7.5227%2C-17.5099%2C-16.0837%2C-14.6428%2C-13.1884%2C-11.722%2C-10.245&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66693,
+      "capturedAt": "2026-11-02T14:50:50.246Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=53.305%2C53.3805%2C53.4373%2C53.4753%2C53.4943%2C53.4943%2C53.4754%2C53.4374&longitude=-8.7588%2C-7.2651%2C-5.7655%2C-4.2616%2C-2.7551%2C-1.2478%2C0.2587%2C1.7626&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 65894,
+      "capturedAt": "2026-11-02T14:50:50.282Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=53.3807%2C53.3052%2C53.2112%2C53.0989%2C53.338%2C53.5261%2C53.6968%2C53.8496&longitude=3.2622%2C4.7559%2C6.2421%2C7.7192%2C-17.8303%2C-16.3772%2C-14.9084%2C-13.4252&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66797,
+      "capturedAt": "2026-11-02T14:50:50.319Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=53.9842%2C54.1002%2C54.1974%2C54.2754%2C54.3341%2C54.3734%2C54.393%2C54.393&longitude=-11.9291%2C-10.4216%2C-8.9043%2C-7.3789%2C-5.8471%2C-4.3107%2C-2.7715%2C-1.2315&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 65854,
+      "capturedAt": "2026-11-02T14:50:50.360Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=54.3734%2C54.3342%2C54.2756%2C54.1976%2C54.1005%2C53.9845%2C54.2019%2C54.3961&longitude=0.3077%2C1.8441%2C3.3759%2C4.9013%2C6.4187%2C7.9262%2C-18.1676%2C-16.6865&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66914,
+      "capturedAt": "2026-11-02T14:50:50.503Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=54.5723%2C54.7301%2C54.8692%2C54.989%2C55.0894%2C55.17%2C55.2307%2C55.2712&longitude=-15.1885%2C-13.675%2C-12.1477%2C-10.6081%2C-9.0579%2C-7.499%2C-5.9333%2C-4.3626&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66901,
+      "capturedAt": "2026-11-02T14:50:50.543Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=55.2916%2C55.2916%2C55.2713%2C55.2308%2C55.1702%2C55.0896%2C54.9893%2C54.8695&longitude=-2.7889%2C-1.2142%2C0.3595%2C1.9302%2C3.496%2C5.0549%2C6.605%2C8.1447&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66273,
+      "capturedAt": "2026-11-02T14:50:50.583Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=55.0642%2C55.2647%2C55.4467%2C55.6097%2C55.7533%2C55.8772%2C55.981%2C56.0643&longitude=-18.5231%2C-17.0126%2C-15.484%2C-13.9387%2C-12.3785%2C-10.8051%2C-9.2203%2C-7.626&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 67746,
+      "capturedAt": "2026-11-02T14:50:50.622Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=56.127%2C56.169%2C56.19%2C56.19%2C56.169%2C56.1272%2C56.0645%2C55.9812&longitude=-6.0244%2C-4.4174%2C-2.8072%2C-1.1959%2C0.4143%2C2.0212%2C3.6229%2C5.2171&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66106,
+      "capturedAt": "2026-11-02T14:50:50.658Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=55.8775%2C55.7536%2C55.9248%2C56.1318%2C56.3198%2C56.4883%2C56.6367%2C56.7648&longitude=6.8019%2C8.3754%2C-18.8982%2C-17.3569%2C-15.7961%2C-14.2174%2C-12.6225%2C-11.0134&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 67303,
+      "capturedAt": "2026-11-02T14:50:50.699Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=56.8721%2C56.9583%2C57.0232%2C57.0665%2C57.0883%2C57.0883%2C57.0666%2C57.0233&longitude=-9.392%2C-7.7605%2C-6.1209%2C-4.4755%2C-2.8266%2C-1.1766%2C0.4723%2C2.1176&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66429,
+      "capturedAt": "2026-11-02T14:50:50.734Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=56.9584%2C56.8723%2C56.765%2C56.637%2C56.7835%2C56.9973%2C57.1916%2C57.3657&longitude=3.7572%2C5.3888%2C7.0102%2C8.6194%2C-19.2942%2C-17.7206%2C-16.1261%2C-14.5122&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 67111,
+      "capturedAt": "2026-11-02T14:50:50.772Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=57.5193%2C57.6517%2C57.7627%2C57.8519%2C57.919%2C57.9639%2C57.9864%2C57.9864&longitude=-12.8809%2C-11.2341%2C-9.574%2C-7.903%2C-6.2232%2C-4.5371%2C-2.8472%2C-1.1561&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 67066,
+      "capturedAt": "2026-11-02T14:50:50.808Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=57.964%2C57.9192%2C57.8521%2C57.7629%2C57.652%2C57.5196%2C57.6401%2C57.8612&longitude=0.5337%2C2.2198%2C3.8996%2C5.5707%2C7.2308%2C8.8776%2C-19.7128%2C-18.1054&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66914,
+      "capturedAt": "2026-11-02T14:50:50.847Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=58.062%2C58.2421%2C58.4009%2C58.5379%2C58.6528%2C58.7451%2C58.8147%2C58.8611&longitude=-16.4754%2C-14.8244%2C-13.1546%2C-11.4681%2C-9.7671%2C-8.0541%2C-6.3317%2C-4.6025&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 67523,
+      "capturedAt": "2026-11-02T14:50:50.888Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=58.8844%2C58.8845%2C58.8612%2C58.8148%2C58.7453%2C58.653%2C58.5382%2C58.4012&longitude=-2.8691%2C-1.1344%2C0.599%2C2.3283%2C4.0507%2C5.7637%2C7.4647%2C9.1513&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66156,
+      "capturedAt": "2026-11-02T14:50:50.925Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=58.4946%2C58.7231%2C58.9309%2C59.1172%2C59.2815%2C59.4234%2C59.5424%2C59.638&longitude=-20.1557%2C-18.5129%2C-16.8456%2C-15.1556%2C-13.4452%2C-11.7165%2C-9.9722%2C-8.2148&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 67498,
+      "capturedAt": "2026-11-02T14:50:50.962Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=59.71%2C59.7582%2C59.7823%2C59.7823%2C59.7583%2C59.7102%2C59.6382%2C59.5426&longitude=-6.4471%2C-4.672%2C-2.8923%2C-1.1112%2C0.6684%2C2.4436%2C4.2113%2C5.9687&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66856,
+      "capturedAt": "2026-11-02T14:50:51.000Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=59.4237%2C59.2819%2C59.3468%2C59.5831%2C59.7981%2C59.9909%2C60.1611%2C60.3081&longitude=7.713%2C9.4417%2C-20.6249%2C-18.945%2C-17.2384%2C-15.5073%2C-13.7539%2C-11.9807&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66465,
+      "capturedAt": "2026-11-02T14:50:51.117Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=60.4313%2C60.5305%2C60.6051%2C60.6551%2C60.6801%2C60.6801%2C60.6551%2C60.6053&longitude=-10.1903%2C-8.3858%2C-6.5699%2C-4.746%2C-2.9171%2C-1.0866%2C0.7423%2C2.5663&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 67157,
+      "capturedAt": "2026-11-02T14:50:51.162Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=60.5307%2C60.4316%2C60.3084%2C60.1615%2C60.1964%2C60.441%2C60.6635%2C60.8632&longitude=4.3821%2C6.1867%2C7.9771%2C9.7503%2C-21.1225%2C-19.4037%2C-17.6558%2C-15.8813&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66065,
+      "capturedAt": "2026-11-02T14:50:51.201Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=61.0396%2C61.1919%2C61.3197%2C61.4225%2C61.4999%2C61.5517%2C61.5777%2C61.5777&longitude=-14.0824%2C-12.2619%2C-10.4228%2C-8.568%2C-6.7009%2C-4.8249%2C-2.9435%2C-1.0603&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66904,
+      "capturedAt": "2026-11-02T14:50:51.243Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=61.5518%2C61.5001%2C61.4227%2C61.32%2C61.1922%2C61.04%2C61.0432%2C61.2965&longitude=0.8211%2C2.6971%2C4.5643%2C6.4191%2C8.2583%2C10.0788%2C-21.651%2C-19.8913&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66127,
+      "capturedAt": "2026-11-02T14:50:51.281Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=61.527%2C61.734%2C61.9168%2C62.0748%2C62.2074%2C62.3141%2C62.3945%2C62.4482&longitude=-18.1%2C-16.2796%2C-14.4326%2C-12.562%2C-10.6708%2C-8.7626%2C-6.8408%2C-4.9092&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66925,
+      "capturedAt": "2026-11-02T14:50:51.327Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=62.4752%2C62.4752%2C62.4483%2C62.3946%2C62.3143%2C62.2077%2C62.0751%2C61.9172&longitude=-2.9717%2C-1.0322%2C0.9053%2C2.8369%2C4.7587%2C6.667%2C8.5582%2C10.4289&hourly=wind_speed_100m%2Cwind_direction_100m%2Ccloud_cover%2Cshortwave_radiation%2Ctemperature_2m&models=ecmwf_ifs025&wind_speed_unit=ms&past_days=7&forecast_days=3&timeformat=unixtime&cell_selection=nearest",
+      "bytes": 66077,
+      "capturedAt": "2026-11-02T14:50:51.367Z",
+      "cached": true
+    },
+    {
+      "url": "https://api.carbonintensity.org.uk/intensity/2026-10-25T14:00Z/2026-11-02T14:00Z",
+      "bytes": 42912,
+      "capturedAt": "2026-11-02T14:50:51.634Z",
+      "cached": true
+    }
+  ],
+  "weatherModel": "ecmwf_ifs025",
+  "height": 100,
+  "weatherGridKm": 100,
+  "quadratureKm": 10
+}

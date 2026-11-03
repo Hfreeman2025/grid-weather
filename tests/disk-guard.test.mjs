@@ -1,0 +1,2 @@
+import{test}from'node:test';import assert from'node:assert/strict';import{assertHeadroom}from'../scripts/disk-guard.mjs';
+test('browser/download disk floor includes expected operation footprint',()=>{const gi=1024**3;assert.throws(()=>assertHeadroom(9.9*gi));assert.throws(()=>assertHeadroom(10.05*gi));assert.doesNotThrow(()=>assertHeadroom(10.2*gi));assert.throws(()=>assertHeadroom(10.5*gi,gi));assert.throws(()=>assertHeadroom(NaN));});
