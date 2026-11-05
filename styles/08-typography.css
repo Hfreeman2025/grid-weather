@@ -1,0 +1,162 @@
+/* Sans reads, Mono records, Condensed signs. The broadcast palette is unchanged. */
+h1,
+h2,
+h3,
+label,
+summary,
+thead th,
+.station > #station-name,
+.presenter-controls > strong,
+.evidence > div > span,
+.map-key > span,
+.weather-key > span,
+.weather-readout > span:first-child,
+.outlook-row > strong {
+  font-family: var(--font-sign);
+}
+label,
+summary,
+thead th {
+  font-weight: 500;
+}
+strong,
+b {
+  font-weight: 600;
+}
+code,
+pre,
+kbd,
+samp,
+time,
+.mix-item dd,
+.evidence strong,
+.best-window strong,
+.outlook-value,
+.outlook-scale,
+.ticks,
+#time-tooltip,
+#model-plot text,
+#model-terms b,
+.correlation-section td:not(:first-child),
+#region-table td:nth-child(2),
+#region-table td:nth-child(3),
+.weather-readout > strong {
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Fixed typographic line metrics keep fallback and Plex text on the same baseline. */
+:root {
+  line-height: 1.3;
+}
+h1,
+h2,
+h3 {
+  font-weight: 600;
+}
+.sea,
+.compass,
+.map-time > strong {
+  font-family: var(--font-sign);
+}
+.weather-readout > strong {
+  font-weight: 600;
+}
+
+.model-scores strong,
+.best-window strong {
+  font-weight: 400;
+}
+#model-terms b {
+  font-weight: 600;
+}
+.evidence > div > span,
+.map-key > span,
+.weather-key > span,
+.weather-readout > span:first-child,
+.sea,
+.compass {
+  font-weight: 500;
+}
+
+/* Typographic slots retain their bounds while swap replaces local fallback metrics. */
+.data-status #status-action {
+  flex: 0 0 430px;
+  width: 430px;
+}
+.timeline-controls > div:first-child {
+  width: 216px;
+  flex: none;
+}
+#timeline-description {
+  width: 300px;
+  flex: none;
+}
+.weather-layers {
+  width: 174px;
+  flex: none;
+}
+.speed-label {
+  width: 78px;
+  flex: none;
+}
+.speed-label select {
+  height: 26px;
+}
+.layer-picker {
+  width: 89px;
+  flex: none;
+}
+.sea {
+  width: 7em;
+  text-align: left;
+}
+.map-time time {
+  font-size: 15px;
+  white-space: nowrap;
+}
+.map-key > .scale + div {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  font-family: var(--font-sign);
+  font-weight: 500;
+  white-space: nowrap;
+  font-size: 9px;
+}
+@media (max-width: 700px) {
+  .timeline-controls > div:first-child {
+    width: 182px;
+  }
+  .speed-label {
+    width: 71px;
+  }
+  .speed-label select {
+    height: 44px;
+  }
+  .map-time time {
+    font-size: 11px;
+  }
+}
+.map-key > .scale + div > span:last-child {
+  display: block;
+  inline-size: 8.3em;
+  flex: none;
+  text-align: left;
+}
+#model-region,
+#region-select,
+#weather-layer,
+.speed-label select {
+  font-family: var(--font-text);
+}
+.model-scores span,
+.model-key > span,
+.mix-item dt {
+  font-family: var(--font-sign);
+  font-weight: 500;
+}
+.outlook-row > span > span {
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+}

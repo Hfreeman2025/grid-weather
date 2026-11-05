@@ -1,0 +1,228 @@
+.model-lab {
+  padding: 36px 24px;
+  background: #0a252c;
+  border-bottom: 1px solid #45656b;
+}
+.model-lab > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.model-lab h2,
+.correlation-section h2 {
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin: 0 0 9px;
+}
+.model-lab header p,
+.correlation-section header p {
+  font-size: 13px;
+  color: #b7cfcb;
+  line-height: 1.65;
+  margin: 0;
+}
+.model-lab button {
+  font-size: 12px;
+}
+.model-lab button[aria-pressed='true'] {
+  color: #142e30;
+  background: #e0df9b;
+  border-color: #e0df9b;
+}
+.model-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.model-toolbar label {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.model-toolbar select {
+  min-width: 220px;
+}
+.model-toolbar > div {
+  display: flex;
+  gap: 6px;
+}
+.model-lab > p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #bcd0ca;
+}
+.model-lab #model-status {
+  font-size: 14px;
+  color: #e0e6c5;
+  margin: 23px 0 8px;
+}
+.model-lab #model-provenance {
+  font-size: 11px;
+  margin-top: 0;
+}
+.model-key {
+  display: flex;
+  gap: 25px;
+  justify-content: flex-end;
+  font-size: 12px;
+  margin-top: 24px;
+}
+.model-key > span:before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  vertical-align: middle;
+  margin-right: 8px;
+  background: currentColor;
+}
+.ridge-key {
+  color: #f1d46a;
+}
+.neso-key {
+  color: #7dc8b1;
+}
+.actual-key {
+  color: #e6ede4;
+}
+#model-plot {
+  display: block;
+  width: 100%;
+  height: 300px;
+  margin-top: 12px;
+}
+#model-plot text {
+  fill: #afc8c9;
+  font-size: 11px;
+}
+#model-plot .model-grid {
+  stroke: #afc8c92b;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+#model-plot .model-line {
+  fill: none;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+#model-plot .ridge {
+  stroke: #efd367;
+}
+#model-plot .neso {
+  stroke: #7dc8b1;
+}
+#model-plot .actual {
+  stroke: #ecf2e9;
+  stroke-dasharray: 3 4;
+}
+.model-scores {
+  display: flex;
+  gap: 70px;
+  border-top: 1px solid #426168;
+  padding-top: 22px;
+}
+.model-scores > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.model-scores span {
+  font-size: 12px;
+  color: #bad0ca;
+}
+.model-scores strong {
+  font-size: 38px;
+  line-height: 1;
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+.model-scores > div:first-child strong {
+  color: #f1d46a;
+}
+.model-scores > div:nth-child(2) strong {
+  color: #7dc8b1;
+}
+#score-target {
+  color: #e5dec1;
+  padding: 12px 0;
+  border-top: 1px solid #426168;
+  border-bottom: 1px solid #426168;
+}
+.validation-note {
+  max-width: 1000px;
+}
+.model-explain {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  padding-top: 25px;
+}
+.model-explain h3 {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 18px;
+}
+.model-explain p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #b4cdca;
+}
+.model-explain label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 12px;
+}
+#wind-hypothesis {
+  width: 100%;
+  accent-color: #e5d573;
+  min-height: 44px;
+}
+#model-terms > div {
+  display: grid;
+  grid-template-columns: 135px 1fr 65px;
+  position: relative;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+#model-terms i {
+  height: 5px;
+  background: #e2d776;
+}
+#model-terms i.negative {
+  background: #80c5af;
+}
+#model-terms b {
+  font-weight: 500;
+  text-align: right;
+  white-space: nowrap;
+}
+.correlation-section {
+  padding: 32px 24px;
+  background: #0b2930;
+}
+.correlation-section > header {
+  max-width: 900px;
+  margin-bottom: 22px;
+}
+.correlation-section table {
+  font-size: 13px;
+}
+.correlation-section td {
+  font-variant-numeric: tabular-nums;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.correlation-section td:not(:first-child) {
+  text-align: right;
+}
+.correlation-section th:not(:first-child) {
+  text-align: right;
+}

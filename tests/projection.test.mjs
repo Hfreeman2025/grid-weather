@@ -1,3 +1,15 @@
-import {test} from 'node:test';import assert from 'node:assert/strict';import {bngToWgs84} from '../src/projection.ts';
-test('British National Grid converts the OS published Norwich control point to WGS84',()=>{const [lat,lon]=bngToWgs84(651409.903,313177.270);assert.ok(Math.abs(lat-52.65798)<.0002,`${lat}`);assert.ok(Math.abs(lon-1.71605)<.0002,`${lon}`);});
-test('central meridian and northern grid points remain geographical and finite',()=>{const south=bngToWgs84(400000,0),north=bngToWgs84(400000,1000000);assert.ok(north[0]>south[0]);assert.ok(south[0]>49&&south[0]<51);assert.ok(Math.abs(south[1]+2)<.01);});
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { bngToWgs84 } from '../src/projection.ts';
+test('British National Grid converts the OS published Norwich control point to WGS84', () => {
+  const [lat, lon] = bngToWgs84(651409.903, 313177.27);
+  assert.ok(Math.abs(lat - 52.65798) < 0.0002, `${lat}`);
+  assert.ok(Math.abs(lon - 1.71605) < 0.0002, `${lon}`);
+});
+test('central meridian and northern grid points remain geographical and finite', () => {
+  const south = bngToWgs84(400000, 0),
+    north = bngToWgs84(400000, 1000000);
+  assert.ok(north[0] > south[0]);
+  assert.ok(south[0] > 49 && south[0] < 51);
+  assert.ok(Math.abs(south[1] + 2) < 0.01);
+});

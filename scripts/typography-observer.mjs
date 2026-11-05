@@ -1,1 +1,18 @@
-export function observeShifts(){window.fontShifts=[];window.hasNativeCLS=PerformanceObserver.supportedEntryTypes.includes('layout-shift');if(!window.hasNativeCLS)return;new PerformanceObserver(list=>{for(const e of list.getEntries())if(!e.hadRecentInput)window.fontShifts.push({value:e.value,time:e.startTime,sources:e.sources?.map(s=>({node:s.node?.id||s.node?.className||s.node?.nodeName,previous:s.previousRect.toJSON(),current:s.currentRect.toJSON()}))});}).observe({type:'layout-shift',buffered:true});}
+export function observeShifts() {
+  window.fontShifts = [];
+  window.hasNativeCLS = PerformanceObserver.supportedEntryTypes.includes('layout-shift');
+  if (!window.hasNativeCLS) return;
+  new PerformanceObserver((list) => {
+    for (const e of list.getEntries())
+      if (!e.hadRecentInput)
+        window.fontShifts.push({
+          value: e.value,
+          time: e.startTime,
+          sources: e.sources?.map((s) => ({
+            node: s.node?.id || s.node?.className || s.node?.nodeName,
+            previous: s.previousRect.toJSON(),
+            current: s.currentRect.toJSON(),
+          })),
+        });
+  }).observe({ type: 'layout-shift', buffered: true });
+}

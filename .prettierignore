@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.cache/
+test-results/
+public/*.json
+public/wind-recorded.svg
+public/favicon.svg
+public/fonts/manifest.json
+public/fonts/OFL-*.txt
+data/*.json
+data/*.geojson
+data/*.html
+data/api-root.txt
+package-lock.json
+
+# Preserve the supplied outlined brand artwork and its licence note.
+docs/brand/

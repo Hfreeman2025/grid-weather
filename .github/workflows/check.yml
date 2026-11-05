@@ -4,6 +4,8 @@ permissions:
   contents: read
 jobs:
   quality:
+    name: Portable checks
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,3 +16,5 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm run check
       - run: npm audit --audit-level=high
+      - name: Local validation boundary
+        run: echo "GPU, frame-time and font-swap browser checks require a graphics host; see docs/validation.md. No live-model service is used."

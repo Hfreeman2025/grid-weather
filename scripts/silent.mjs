@@ -1,16 +1,5 @@
-// Every browser these scripts drive is silent: future page changes must remain silent, and an
-// automated run must never come out of the speakers, nor even open an audio
-// device (macOS then holds an audio assertion for the browser).
-//
-//   All three: the init script below replaces the page's live AudioContext
-//   with one that has no device at all. It is an OfflineAudioContext that is
-//   never rendered, with a clock that keeps real time, so the page schedules
-//   and draws exactly as it would while nothing is ever played. Muting alone
-//   is not enough: a live context playing silence still opens the device.
-//   Chromium: --mute-audio as well. Firefox: media.volume_scale 0 as well.
-//
-// OfflineAudioContext itself is left alone: records and measurements render
-// to memory, and their output is what the checks read.
+// An OfflineAudioContext prevents automated pages from opening an audio device.
+// Chromium and Firefox are also muted by the launch helper.
 
 /** Runs in the page before its own scripts: `new AudioContext()` gets a context with no output device. */
 export function silenceLiveAudio() {
@@ -64,18 +53,4 @@ export function silenceLiveAudio() {
   }
   window.AudioContext = DeviceFreeAudioContext;
   window.webkitAudioContext = DeviceFreeAudioContext;
-}
-
-/** Launch a browser that can make no sound. */
-export function launchSilent(engine, name, args = []) {
-  if (name === 'chromium') return engine.launch({ args: ['--mute-audio', ...args] });
-  if (name === 'firefox') return engine.launch({ firefoxUserPrefs: { 'media.volume_scale': '0.0' } });
-  return engine.launch();
-}
-
-/** A browser context whose pages can open no audio device. */
-export async function silentContext(browser, options = {}) {
-  const context = await browser.newContext(options);
-  await context.addInitScript(silenceLiveAudio);
-  return context;
 }

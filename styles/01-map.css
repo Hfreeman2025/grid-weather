@@ -1,0 +1,381 @@
+:root {
+  font-family: var(--font-text);
+  --font-text: 'IBM Plex Sans', 'Plex Sans Metrics', sans-serif;
+  --font-data: 'IBM Plex Mono', 'Plex Mono Metrics', monospace;
+  --font-sign: 'IBM Plex Sans Condensed', 'Plex Condensed Metrics', sans-serif;
+  color: #edf6f2;
+  background: #0b292f;
+  font-synthesis: none;
+  color-scheme: dark;
+  --sea: #0b292f;
+  --ink: #edf6f2;
+  --muted: #a8c4c4;
+  --line: #44646a;
+  --yellow: #f4df67;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button,
+a,
+select,
+summary {
+  touch-action: manipulation;
+}
+button {
+  cursor: pointer;
+  color: inherit;
+  background: transparent;
+  border: 1px solid #78999b;
+  padding: 7px 12px;
+  border-radius: 0;
+}
+button:hover {
+  background: #294c51;
+}
+a {
+  color: inherit;
+  text-underline-offset: 4px;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+svg path:focus-visible,
+#caption:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 3px;
+}
+button:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+[hidden] {
+  display: none !important;
+}
+.skip-link {
+  position: fixed;
+  left: 12px;
+  top: 10px;
+  z-index: 100;
+  background: #f4df67;
+  color: #0b292f;
+  padding: 12px;
+}
+.skip-link:not(:focus) {
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+}
+.masthead {
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--line);
+  background: #092228;
+}
+.masthead h1 {
+  font-size: 21px;
+  letter-spacing: -0.5px;
+  margin: 0 0 3px;
+  font-weight: 600;
+}
+.masthead p {
+  font-size: 12px;
+  color: #c1d6d4;
+  margin: 0;
+}
+.masthead nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 12px;
+}
+.masthead nav a {
+  text-decoration: none;
+}
+.masthead nav button {
+  font-size: 12px;
+}
+.masthead #presenter-start {
+  border-color: #d4df93;
+  background: #dae5aa;
+  color: #142f30;
+}
+.data-status {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #15373e;
+  padding: 0 24px;
+  font-size: 11px;
+  color: #c4dad6;
+}
+.data-status[data-mode='offline'] {
+  color: #f6dca6;
+  background: #343e35;
+}
+.data-status #status-action {
+  margin-left: auto;
+}
+.data-status button {
+  font-size: 10px;
+  border: 0;
+  border-left: 1px solid #6f8a88;
+  padding: 0 0 0 16px;
+}
+.engine {
+  position: relative;
+  height: calc(100svh - 232px);
+  min-height: 470px;
+  isolation: isolate;
+}
+.map-scene {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--sea);
+  background-image:
+    linear-gradient(#b8d5c70a 1px, transparent 1px),
+    linear-gradient(90deg, #b8d5c70a 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+.loading-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: #0b292f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  padding: 24px;
+}
+.loading-screen strong {
+  font-size: 20px;
+}
+.loading-screen span {
+  font-size: 13px;
+  color: var(--muted);
+  max-width: 420px;
+  line-height: 1.6;
+}
+.station {
+  position: absolute;
+  left: 24px;
+  top: 24px;
+  z-index: 3;
+  max-width: 220px;
+}
+.station > #station-name {
+  display: block;
+  min-height: 30px;
+  font-size: 15px;
+  line-height: 1.35;
+  max-width: 220px;
+}
+.station > div {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  margin-top: 4px;
+}
+.station strong {
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+  font-size: 66px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -2px;
+}
+.station > div > span {
+  font-size: 11px;
+  color: #d2dfd9;
+}
+.station > #intensity-description {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #c5d8ce;
+}
+.station button {
+  display: none;
+}
+.map-time {
+  position: absolute;
+  right: 296px;
+  top: 24px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  text-align: right;
+}
+.map-time strong {
+  font-size: 12px;
+  font-weight: 600;
+  color: #f5df8c;
+}
+.map-time time {
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+}
+.map-time #render-mode {
+  font-size: 10px;
+  color: #a9c5c5;
+}
+.map-wrap {
+  height: calc(100% - 24px);
+  width: auto;
+  aspect-ratio: 690/1260;
+  position: absolute;
+  top: 12px;
+  left: calc(60% - 168px);
+  transform: translateX(-50%);
+  filter: none;
+}
+.map-wrap canvas,
+.map-wrap > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.map-wrap #map {
+  overflow: visible;
+}
+.map-wrap #map path {
+  fill: #71a88f;
+  stroke: #174148;
+  stroke-width: 1.7;
+  cursor: pointer;
+}
+.map-wrap.webgl #map path {
+  fill: transparent;
+}
+.map-wrap #map path.selected {
+  stroke: #fcf3ce;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+.map-wrap #map path.presented {
+  stroke: #f5df6e;
+  stroke-width: 2.7;
+  vector-effect: non-scaling-stroke;
+}
+.map-wrap #map path:hover,
+.map-wrap #map path:focus-visible {
+  stroke: #fff3b4;
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+}
+#map-labels {
+  pointer-events: none;
+  overflow: visible;
+}
+#map-labels text {
+  font-family: var(--font-data);
+  font-size: 28px;
+  font-weight: 600;
+  fill: #0a2c33;
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: #f0f7dd9e;
+  stroke-width: 4px;
+  stroke-linejoin: round;
+  font-variant-numeric: tabular-nums;
+}
+#map-labels.no-values text {
+  display: none;
+}
+.sea {
+  position: absolute;
+  pointer-events: none;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #82a8ad;
+}
+.sea-west {
+  left: 28%;
+  top: 43%;
+  transform: rotate(-65deg);
+}
+.sea-east {
+  right: 320px;
+  top: 48%;
+  transform: rotate(-7deg);
+}
+.compass {
+  position: absolute;
+  right: 312px;
+  top: 115px;
+  color: #b8d2d1;
+  text-align: center;
+  font-size: 11px;
+}
+.compass span {
+  display: block;
+  font-size: 24px;
+  line-height: 1.7;
+}
+.map-key {
+  position: absolute;
+  left: 250px;
+  top: 26px;
+  width: 175px;
+  color: #c2d7d2;
+  font-size: 10px;
+}
+.map-key > span {
+  display: block;
+  margin-bottom: 8px;
+}
+.scale {
+  height: 6px;
+  background: linear-gradient(90deg, #87c6a5, #efc370, #db7358);
+}
+.map-key > div:last-child {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  margin-top: 6px;
+  gap: 8px;
+}
+.map-values {
+  position: absolute;
+  right: 296px;
+  bottom: 18px;
+  padding: 5px 8px;
+  font-size: 10px;
+  color: #c2d7d2;
+  border-color: #739397;
+}
+.map-tooltip {
+  position: absolute;
+  z-index: 12;
+  background: #e9f3ec;
+  color: #103238;
+  padding: 12px 14px;
+  max-width: 210px;
+  white-space: pre-line;
+  font-size: 12px;
+  line-height: 1.75;
+  pointer-events: none;
+  border-left: 3px solid var(--yellow);
+}

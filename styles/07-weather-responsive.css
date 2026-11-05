@@ -1,0 +1,284 @@
+@media (max-width: 1000px) {
+  .weather-readout {
+    top: 205px;
+    max-width: 205px;
+  }
+  .weather-readout > strong {
+    font-size: 21px;
+  }
+  .presenter {
+    height: 244px;
+  }
+  .model-explain {
+    gap: 30px;
+  }
+  .timeline-controls > span {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .engine {
+    grid-template-rows: minmax(0, 1fr) 236px;
+  }
+  .presenter {
+    height: 236px;
+  }
+  .presenter #caption {
+    height: 50px;
+    margin: 6px 0 2px;
+  }
+  .weather-caption {
+    font-size: 10px;
+    height: 29px;
+    margin: 0 0 4px;
+    line-height: 1.4;
+  }
+  .weather-readout {
+    top: 125px;
+    left: 12px;
+    max-width: 140px;
+    gap: 4px;
+    background: #0a252b99;
+    padding: 0;
+  }
+  .weather-readout > span:first-child {
+    font-size: 9px;
+  }
+  .weather-readout > strong {
+    font-size: 16px;
+    line-height: 1.2;
+    min-height: 36px;
+    max-width: 135px;
+  }
+  .weather-readout > span,
+  .weather-readout > a {
+    font-size: 8px;
+    line-height: 1.4;
+  }
+  .weather-readout #weather-source {
+    max-height: 34px;
+    overflow: hidden;
+  }
+  .weather-layers {
+    display: none;
+  }
+  .layer-picker {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 9px;
+  }
+  .layer-picker select {
+    height: 44px;
+    width: 62px;
+    font-size: 10px;
+    padding: 4px;
+  }
+  .speed-label {
+    gap: 3px;
+  }
+  .speed-label select {
+    width: 42px;
+  }
+  .timeline-controls {
+    gap: 5px;
+  }
+  .timeline-controls > div {
+    gap: 4px;
+  }
+  .timeline-controls button {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+  .weather-notes {
+    display: block;
+    padding: 18px 12px;
+    font-size: 10px;
+  }
+  .weather-notes > div:last-child {
+    align-items: flex-start;
+    text-align: left;
+    margin-top: 14px;
+  }
+  .weather-notes strong {
+    font-size: 12px;
+  }
+  .model-lab {
+    padding: 28px 12px;
+  }
+  .model-lab > header {
+    gap: 12px;
+  }
+  .model-lab h2,
+  .correlation-section h2 {
+    font-size: 22px;
+  }
+  .model-lab header p,
+  .correlation-section header p {
+    font-size: 12px;
+  }
+  .model-lab > header button {
+    white-space: nowrap;
+    min-height: 44px;
+    padding: 7px 10px;
+  }
+  .model-toolbar {
+    display: block;
+  }
+  .model-toolbar label {
+    display: block;
+  }
+  .model-toolbar select {
+    margin: 9px 0 12px;
+    width: 100%;
+    min-height: 44px;
+  }
+  .model-toolbar button {
+    min-height: 44px;
+  }
+  .model-lab #model-status {
+    font-size: 12px;
+    min-height: 38px;
+  }
+  .model-lab #model-provenance {
+    font-size: 10px;
+  }
+  .model-lab > p {
+    font-size: 11px;
+  }
+  .model-key {
+    gap: 15px;
+    font-size: 10px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  .model-key > span:before {
+    width: 14px;
+    margin-right: 4px;
+  }
+  #model-plot {
+    height: 240px;
+    min-width: 0;
+  }
+  #model-plot text {
+    font-size: 16px;
+  }
+  .model-scores {
+    gap: 0;
+    justify-content: space-between;
+  }
+  .model-scores strong {
+    font-size: 32px;
+  }
+  .model-scores span {
+    font-size: 10px;
+  }
+  .model-explain {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .model-explain h3 {
+    font-size: 15px;
+  }
+  .model-explain p {
+    font-size: 11px;
+  }
+  #model-terms > div {
+    font-size: 11px;
+    grid-template-columns: 120px 1fr 62px;
+    gap: 8px;
+  }
+  .correlation-section {
+    padding: 28px 12px;
+  }
+  .correlation-section table {
+    font-size: 11px;
+  }
+  .correlation-section th {
+    min-width: 65px;
+  }
+  .correlation-section td:first-child {
+    min-width: 125px;
+  }
+}
+.engine[data-layer='wind'] #map path {
+  fill-opacity: 0.64;
+}
+.weather-readout > strong {
+  white-space: nowrap;
+}
+@media (max-width: 700px) {
+  .timeline-controls > .weather-layers {
+    display: none;
+  }
+  .timeline-controls > div:first-child {
+    flex-shrink: 0;
+  }
+  .timeline-controls button {
+    white-space: nowrap;
+  }
+  #model-plot text {
+    font-size: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #recorded-wind circle {
+    display: none;
+  }
+}
+.map-scene {
+  background-image: none;
+}
+.weather-key {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 10px;
+}
+.weather-key > div:last-child {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+}
+.wind-scale {
+  height: 5px;
+  background: linear-gradient(90deg, #4c99b0, #edf9e8 65%, #ffbd57);
+}
+.engine[data-layer='sun'] .wind-scale {
+  background: linear-gradient(90deg, #091c26, #f2b04c);
+}
+.model-toolbar select,
+.layer-picker select {
+  background: #0e3038;
+  color: #edf2e6;
+  border: 1px solid #78989b;
+  font-family: inherit;
+  border-radius: 0;
+}
+.model-toolbar select {
+  padding: 8px 12px;
+  font-size: 13px;
+}
+@media (max-width: 700px) {
+  .weather-key {
+    font-size: 8px;
+    margin-top: 8px;
+    gap: 3px;
+  }
+  .weather-key > div:last-child {
+    font-size: 8px;
+  }
+}
+
+/* Keep the dense physical tracer field behind the broadcast information. */
+#wind-canvas {
+  opacity: 0.3;
+}
+
+.engine[data-layer='sun'] #wind-canvas {
+  opacity: 0.85;
+}
+.engine[data-layer='sun'] #map path {
+  fill-opacity: 0.65;
+}

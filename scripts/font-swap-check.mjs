@@ -1,5 +1,96 @@
-import{launch,session}from'./browser-kit.mjs';import{observeShifts}from'./typography-observer.mjs';import{mkdir,writeFile}from'node:fs/promises';import assert from'node:assert/strict';
+import { launch, session } from './browser-kit.mjs';
+import { observeShifts } from './typography-observer.mjs';
+import { mkdir, writeFile } from 'node:fs/promises';
+import assert from 'node:assert/strict';
 // The fallback capture intentionally precedes font completion; actual readiness is awaited after release.
-process.env.PW_TEST_SCREENSHOT_NO_FONTS_READY='1';
-await mkdir('shots/plex/swap',{recursive:true});const results=[],name=process.argv.find(a=>a.startsWith('--browser='))?.split('=')[1]??'chromium',b=await launch(name,{gpu:true});
-try{for(const width of[1440,390]){let release;const fontWait=new Promise(resolve=>{release=resolve;}),s=await session(b,{width,height:width===1440?900:844,reduced:true,initScript:observeShifts,fontWait,waitUntil:'domcontentloaded'}),p=s.page;try{await p.waitForFunction(()=>!!window.gridWeatherModel);await p.waitForTimeout(700);const before=await p.evaluate(()=>({rawCLS:window.hasNativeCLS?window.fontShifts.reduce((s,e)=>s+e.value,0):null,rects:Object.fromEntries(['engine','controls','caption','evidence','weather-reading','model-lab'].map(id=>[id,document.getElementById(id).getBoundingClientRect().toJSON()]))}));await p.screenshot({path:`shots/plex/swap/${name}-${width}-fallback.png`});await p.evaluate(()=>{window.fontSwapStarted=performance.now();window.fontShifts=[];});release();await p.evaluate(()=>document.fonts.ready);await p.evaluate(async()=>{for(const f of document.fonts)if(f.family.replaceAll('"','').startsWith("IBM Plex"))await f.load();});await p.waitForTimeout(250);const after=await p.evaluate(()=>({supported:window.hasNativeCLS,cls:window.hasNativeCLS?window.fontShifts.reduce((s,e)=>s+e.value,0):null,shifts:window.fontShifts,rects:Object.fromEntries(['engine','controls','caption','evidence','weather-reading','model-lab'].map(id=>[id,document.getElementById(id).getBoundingClientRect().toJSON()])),fonts:[...document.fonts].map(f=>({family:f.family,weight:f.weight,style:f.style,status:f.status})),overflow:document.documentElement.scrollWidth-innerWidth}));await p.screenshot({path:`shots/plex/swap/${name}-${width}-plex.png`});results.push({name,width,before,after,errors:s.errors,warnings:s.warnings,requests:s.requests});console.log(name,width,'swapCLS',after.cls,JSON.stringify(after.shifts));if(!process.argv.includes('--observe-only')&&after.cls!==null)assert.equal(after.cls,0,JSON.stringify(after.shifts));assert.equal(after.overflow,0);assert.equal(after.fonts.filter(f=>f.family.replaceAll('"','').startsWith('IBM Plex')&&f.status==='loaded').length,8);assert.deepEqual(s.errors,[]);assert.deepEqual(s.warnings,[]);}finally{release();await s.context.close();}}}finally{await b.close();await writeFile(`shots/plex/swap/report-${name}.json`,JSON.stringify(results,null,2));}
+process.env.PW_TEST_SCREENSHOT_NO_FONTS_READY = '1';
+await mkdir('test-results/fonts/swap', { recursive: true });
+const results = [],
+  name = process.argv.find((a) => a.startsWith('--browser='))?.split('=')[1] ?? 'chromium',
+  b = await launch(name, { gpu: true });
+try {
+  for (const width of [1440, 390]) {
+    let release;
+    const fontWait = new Promise((resolve) => {
+        release = resolve;
+      }),
+      s = await session(b, {
+        width,
+        height: width === 1440 ? 900 : 844,
+        reduced: true,
+        initScript: observeShifts,
+        fontWait,
+        waitUntil: 'domcontentloaded',
+      }),
+      p = s.page;
+    try {
+      await p.waitForFunction(() => !!window.gridWeatherModel);
+      await p.waitForTimeout(700);
+      const before = await p.evaluate(() => ({
+        rawCLS: window.hasNativeCLS ? window.fontShifts.reduce((s, e) => s + e.value, 0) : null,
+        rects: Object.fromEntries(
+          ['engine', 'controls', 'caption', 'evidence', 'weather-reading', 'model-lab'].map(
+            (id) => [id, document.getElementById(id).getBoundingClientRect().toJSON()],
+          ),
+        ),
+      }));
+      await p.screenshot({ path: `test-results/fonts/swap/${name}-${width}-fallback.png` });
+      await p.evaluate(() => {
+        window.fontSwapStarted = performance.now();
+        window.fontShifts = [];
+      });
+      release();
+      await p.evaluate(() => document.fonts.ready);
+      await p.evaluate(async () => {
+        for (const f of document.fonts)
+          if (f.family.replaceAll('"', '').startsWith('IBM Plex')) await f.load();
+      });
+      await p.waitForTimeout(250);
+      const after = await p.evaluate(() => ({
+        supported: window.hasNativeCLS,
+        cls: window.hasNativeCLS ? window.fontShifts.reduce((s, e) => s + e.value, 0) : null,
+        shifts: window.fontShifts,
+        rects: Object.fromEntries(
+          ['engine', 'controls', 'caption', 'evidence', 'weather-reading', 'model-lab'].map(
+            (id) => [id, document.getElementById(id).getBoundingClientRect().toJSON()],
+          ),
+        ),
+        fonts: [...document.fonts].map((f) => ({
+          family: f.family,
+          weight: f.weight,
+          style: f.style,
+          status: f.status,
+        })),
+        overflow: document.documentElement.scrollWidth - innerWidth,
+      }));
+      await p.screenshot({ path: `test-results/fonts/swap/${name}-${width}-plex.png` });
+      results.push({
+        name,
+        width,
+        before,
+        after,
+        errors: s.errors,
+        warnings: s.warnings,
+        requests: s.requests,
+      });
+      console.log(name, width, 'swapCLS', after.cls, JSON.stringify(after.shifts));
+      if (!process.argv.includes('--observe-only') && after.cls !== null)
+        assert.equal(after.cls, 0, JSON.stringify(after.shifts));
+      assert.equal(after.overflow, 0);
+      assert.equal(
+        after.fonts.filter(
+          (f) => f.family.replaceAll('"', '').startsWith('IBM Plex') && f.status === 'loaded',
+        ).length,
+        8,
+      );
+      assert.deepEqual(s.errors, []);
+      assert.deepEqual(s.warnings, []);
+    } finally {
+      release();
+      await s.context.close();
+    }
+  }
+} finally {
+  await b.close();
+  await writeFile(`test-results/fonts/swap/report-${name}.json`, JSON.stringify(results, null, 2));
+}

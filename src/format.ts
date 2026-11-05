@@ -1,11 +1,29 @@
-const clock = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit' });
-const dayFormat = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', weekday: 'short', day: 'numeric', month: 'short' });
-const dateFormat = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', day: 'numeric', month: 'short', year: 'numeric' });
+const clock = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Europe/London',
+  hour: '2-digit',
+  minute: '2-digit',
+});
+const dayFormat = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Europe/London',
+  weekday: 'short',
+  day: 'numeric',
+  month: 'short',
+});
+const dateFormat = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Europe/London',
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+});
 const weekday = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', weekday: 'short' });
 export const time = (n: number): string => clock.format(n);
 export const day = (n: number): string => dayFormat.format(n);
 export const fullDate = (n: number): string => dateFormat.format(n);
-const zoneFormat = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', timeZoneName: 'short' });
-export const zone = (n: number): string => zoneFormat.formatToParts(n).find(p => p.type === 'timeZoneName')?.value ?? 'UK';
+const zoneFormat = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Europe/London',
+  timeZoneName: 'short',
+});
+export const zone = (n: number): string =>
+  zoneFormat.formatToParts(n).find((p) => p.type === 'timeZoneName')?.value ?? 'UK';
 export const shortWhen = (n: number): string => `${weekday.format(n)} ${time(n)} ${zone(n)}`;
 export const number = (n: number): string => String(Math.round(n * 10) / 10);

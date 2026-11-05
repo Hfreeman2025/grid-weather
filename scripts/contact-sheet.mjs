@@ -1,0 +1,26 @@
+import { launch } from './browser-kit.mjs';
+import { readFile } from 'node:fs/promises';
+const pass = process.argv[2] ?? '1',
+  root =
+    process.argv.find((a) => a.startsWith('--root='))?.split('=')[1] ?? `test-results/pass-${pass}`,
+  report = JSON.parse(await readFile(`${root}/report.json`, 'utf8'));
+const b = await launch();
+try {
+  const p = await b.newPage({ viewport: { width: 1200, height: 1120 } });
+  for (let offset = 0; offset < report.shots.length; offset += 12) {
+    const files = report.shots.slice(offset, offset + 12),
+      tiles = await Promise.all(
+        files.map(
+          async (f) =>
+            `<figure><figcaption>${f.split('/').at(-1)}</figcaption><img src="data:image/png;base64,${(await readFile(f)).toString('base64')}"></figure>`,
+        ),
+      );
+    await p.setContent(
+      `<style>*{box-sizing:border-box}body{margin:0;background:#d9e1df;font:12px Arial;color:#123}main{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:8px}figure{margin:0;height:268px;background:#fff;padding:6px}figcaption{height:18px}img{display:block;width:100%;height:235px;object-fit:contain}</style><main>${tiles.join('')}</main>`,
+    );
+    await p.locator('img').evaluateAll((imgs) => Promise.all(imgs.map((img) => img.decode())));
+    await p.screenshot({ path: `${root}/contact-${offset / 12 + 1}.png` });
+  }
+} finally {
+  await b.close();
+}

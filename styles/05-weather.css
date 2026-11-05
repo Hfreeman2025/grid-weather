@@ -1,0 +1,139 @@
+/* Weather layers share the carbon map projection. */
+#wind-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+#recorded-wind,
+#wind-vectors {
+  overflow: visible;
+  pointer-events: none;
+  z-index: 0;
+}
+#recorded-wind.recorded-hidden,
+#wind-vectors.vectors-hidden {
+  display: none;
+}
+#map {
+  z-index: 1;
+}
+#map-labels {
+  z-index: 2;
+}
+.engine[data-layer='wind'] #map path {
+  fill-opacity: 0.48;
+}
+.engine[data-layer='sun'] #map path {
+  fill-opacity: 0.2;
+}
+.engine[data-layer='carbon'] #map path {
+  fill-opacity: 1;
+}
+.wind-vector,
+.wind-fast {
+  fill: none;
+  stroke: #a9d7da;
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.65;
+}
+.wind-fast {
+  stroke: #f3ca7c;
+}
+.weather-readout {
+  position: absolute;
+  left: 24px;
+  top: 174px;
+  max-width: 245px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 0 12px 0 0;
+  background: #0a252bba;
+}
+.weather-readout > span:first-child {
+  font-size: 12px;
+  color: #c2d2ce;
+}
+.weather-readout > strong {
+  font-size: 25px;
+  letter-spacing: -0.5px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  min-height: 30px;
+}
+.weather-readout > span {
+  font-size: 10px;
+  color: #aac6c6;
+  line-height: 1.5;
+}
+.weather-readout > a {
+  font-size: 10px;
+  color: #b9d4d0;
+}
+.weather-caption {
+  font-size: 11px;
+  line-height: 1.45;
+  color: #bad3cd;
+  height: 32px;
+  margin: 2px 0 7px;
+  overflow: hidden;
+}
+.presenter {
+  height: 244px;
+}
+.presenter #caption {
+  height: 54px;
+  margin-bottom: 4px;
+}
+.weather-layers {
+  display: flex;
+  gap: 4px;
+  margin-left: 14px;
+}
+.weather-layers button {
+  font-size: 11px;
+}
+.weather-layers button[aria-pressed='true'] {
+  background: #dfe6b3;
+  color: #0b292f;
+  border-color: #dfe6b3;
+}
+.layer-picker {
+  display: none;
+}
+.weather-notes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 20px 24px;
+  border-bottom: 1px solid #42646b;
+  background: #102e36;
+  font-size: 11px;
+  line-height: 1.7;
+}
+.weather-notes > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 650px;
+}
+.weather-notes > div:last-child {
+  align-items: flex-end;
+  text-align: right;
+}
+.weather-notes strong {
+  font-size: 13px;
+  font-weight: 500;
+}
+.weather-notes span {
+  color: #bbd0ce;
+}
+.weather-notes button {
+  font-size: 12px;
+}

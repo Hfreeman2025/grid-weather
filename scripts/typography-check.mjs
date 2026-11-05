@@ -1,5 +1,93 @@
-import{observeShifts}from'./typography-observer.mjs';import{launch,session}from'./browser-kit.mjs';import{mkdir,writeFile}from'node:fs/promises';import{execFileSync}from'node:child_process';import assert from'node:assert/strict';
-const phase=process.argv.find(a=>a.startsWith('--phase='))?.split('=')[1]??'before',only=process.argv.find(a=>a.startsWith('--browser='))?.split('=')[1],root=`shots/plex/${phase}`;await mkdir(root,{recursive:true});const reports=[];
+import { observeShifts } from './typography-observer.mjs';
+import { launch, session } from './browser-kit.mjs';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+import assert from 'node:assert/strict';
+const phase = process.argv.find((a) => a.startsWith('--phase='))?.split('=')[1] ?? 'before',
+  only = process.argv.find((a) => a.startsWith('--browser='))?.split('=')[1],
+  root = `test-results/fonts/${phase}`;
+await mkdir(root, { recursive: true });
+const reports = [];
 
-for(const name of only?[only]:['chromium']){const processes=execFileSync('ps',['-axo','pid=,comm='],{encoding:'utf8'}).split('\n').filter(s=>/\/(?:Google Chrome for Testing|firefox|MiniBrowser|Playwright|headless_shell)$/.test(s));assert.equal(processes.length,0,'Another automated browser is running: '+processes.join(','));const b=await launch(name,{gpu:true});try{for(const width of[1440,390]){const s=await session(b,{width,height:width===1440?900:844,reduced:true,initScript:observeShifts}),p=s.page;await p.waitForFunction(()=>!!window.gridWeatherModel);await p.evaluate(()=>document.fonts.ready);await p.waitForTimeout(1200);const metric=await p.evaluate(()=>({shifts:window.fontShifts,cls:window.hasNativeCLS?window.fontShifts.reduce((s,e)=>s+e.value,0):null,loaded:document.fonts.status,body:getComputedStyle(document.body).fontFamily,title:getComputedStyle(document.querySelector('h1')).fontFamily,number:getComputedStyle(document.querySelector('#intensity')).fontFamily,overflow:document.documentElement.scrollWidth-innerWidth,fonts:[...document.fonts].map(f=>({family:f.family,status:f.status,weight:f.weight,style:f.style}))}));await p.screenshot({path:`${root}/${name}-${width}-overview.png`});for(const [id,label]of[['model-lab','model'],['outlook','outlook'],['sources-dialog','sources']]){if(label==='sources')await p.locator('#sources-open').click();await p.locator('#'+id).screenshot({path:`${root}/${name}-${width}-${label}.png`});if(label==='sources')await p.keyboard.press('Escape');}reports.push({name,width,...metric,errors:s.errors,warnings:s.warnings,requests:s.requests});await s.context.close();assert.equal(metric.overflow,0);if(phase!=='before'&&!process.argv.includes('--observe-only')&&metric.cls!==null)assert.equal(metric.cls,0,JSON.stringify(metric.shifts));assert.deepEqual(s.errors,[]);assert.deepEqual(s.warnings,[]);}}finally{await b.close();await writeFile(`${root}/report-${name}.json`,JSON.stringify(reports.filter(r=>r.name===name),null,2));}}
-console.log(phase, reports.map(r=>({name:r.name,width:r.width,cls:r.cls,body:r.body,number:r.number})));
+for (const name of only ? [only] : ['chromium']) {
+  const processes = execFileSync('ps', ['-axo', 'pid=,comm='], { encoding: 'utf8' })
+    .split('\n')
+    .filter((s) =>
+      /\/(?:Google Chrome for Testing|firefox|MiniBrowser|Playwright|headless_shell)$/.test(s),
+    );
+  assert.equal(processes.length, 0, 'Another automated browser is running: ' + processes.join(','));
+  const b = await launch(name, { gpu: true });
+  try {
+    for (const width of [1440, 390]) {
+      const s = await session(b, {
+          width,
+          height: width === 1440 ? 900 : 844,
+          reduced: true,
+          initScript: observeShifts,
+        }),
+        p = s.page;
+      await p.waitForFunction(() => !!window.gridWeatherModel);
+      await p.evaluate(() => document.fonts.ready);
+      await p.waitForTimeout(1200);
+      const metric = await p.evaluate(() => ({
+        shifts: window.fontShifts,
+        cls: window.hasNativeCLS ? window.fontShifts.reduce((s, e) => s + e.value, 0) : null,
+        loaded: document.fonts.status,
+        body: getComputedStyle(document.body).fontFamily,
+        title: getComputedStyle(document.querySelector('h1')).fontFamily,
+        number: getComputedStyle(document.querySelector('#intensity')).fontFamily,
+        overflow: document.documentElement.scrollWidth - innerWidth,
+        fonts: [...document.fonts].map((f) => ({
+          family: f.family,
+          status: f.status,
+          weight: f.weight,
+          style: f.style,
+        })),
+      }));
+      await p.screenshot({ path: `${root}/${name}-${width}-overview.png` });
+      for (const [id, label] of [
+        ['model-lab', 'model'],
+        ['outlook', 'outlook'],
+        ['sources-dialog', 'sources'],
+      ]) {
+        if (label === 'sources') await p.locator('#sources-open').click();
+        await p.locator('#' + id).screenshot({ path: `${root}/${name}-${width}-${label}.png` });
+        if (label === 'sources') await p.keyboard.press('Escape');
+      }
+      reports.push({
+        name,
+        width,
+        ...metric,
+        errors: s.errors,
+        warnings: s.warnings,
+        requests: s.requests,
+      });
+      await s.context.close();
+      assert.equal(metric.overflow, 0);
+      if (phase !== 'before' && !process.argv.includes('--observe-only') && metric.cls !== null)
+        assert.equal(metric.cls, 0, JSON.stringify(metric.shifts));
+      assert.deepEqual(s.errors, []);
+      assert.deepEqual(s.warnings, []);
+    }
+  } finally {
+    await b.close();
+    await writeFile(
+      `${root}/report-${name}.json`,
+      JSON.stringify(
+        reports.filter((r) => r.name === name),
+        null,
+        2,
+      ),
+    );
+  }
+}
+console.log(
+  phase,
+  reports.map((r) => ({
+    name: r.name,
+    width: r.width,
+    cls: r.cls,
+    body: r.body,
+    number: r.number,
+  })),
+);

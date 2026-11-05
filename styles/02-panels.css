@@ -1,0 +1,234 @@
+#sidebar-dock {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  bottom: 16px;
+  width: 252px;
+  background: #0a2228ed;
+  border: 1px solid #3d6066;
+  overflow: auto;
+}
+#region-panel {
+  padding: 19px 17px;
+  line-height: 1.4;
+}
+.panel-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.panel-top label {
+  font-size: 11px;
+  color: var(--muted);
+}
+#details-close {
+  display: none;
+}
+#region-select {
+  width: 100%;
+  font-size: 12px;
+  color: var(--ink);
+  background: #102d34;
+  border: 1px solid #6d8d92;
+  padding: 8px 5px;
+  margin-top: 8px;
+  border-radius: 0;
+}
+#region-name {
+  font-size: 18px;
+  line-height: 1.25;
+  margin: 19px 0 22px;
+  min-height: 45px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+.mix-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.mix-heading h3 {
+  font-size: 12px;
+  margin: 0;
+  font-weight: 500;
+}
+.mix-heading time {
+  font-size: 10px;
+  color: var(--muted);
+}
+.mix-bar {
+  height: 10px;
+  display: flex;
+  gap: 1px;
+  overflow: hidden;
+}
+.mix-bar span {
+  height: 100%;
+}
+.mix-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 14px;
+  margin: 15px 0 24px;
+}
+.mix-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  font-size: 10px;
+}
+.mix-item dt {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #bed3ce;
+}
+.mix-item dt:before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: var(--fuel);
+  flex: none;
+}
+.mix-item dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+.best-window {
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.best-window h3 {
+  font-size: 12px;
+  color: #d5e7b2;
+  font-weight: 500;
+  margin: 0;
+}
+.best-window strong {
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+.best-window span {
+  font-size: 10px;
+  color: #bcd3c5;
+  line-height: 1.6;
+}
+.best-window button {
+  font-size: 11px;
+  margin-top: 4px;
+  align-self: flex-start;
+  border-color: #a5bda6;
+}
+#window-comparison {
+  font-size: 11px;
+  color: #d7e8b3;
+  line-height: 1.6;
+  margin: 17px 0;
+}
+.panel-note {
+  font-size: 10px;
+  color: #a9bfc0;
+  margin: 12px 0 0;
+}
+.presenter {
+  position: absolute;
+  left: 24px;
+  bottom: 22px;
+  width: 420px;
+  height: 226px;
+  z-index: 5;
+  background: #0a2228f5;
+  border-left: 3px solid var(--yellow);
+  padding: 12px 14px 10px;
+  box-shadow: 0 1px 0 #68858b;
+  overflow: hidden;
+}
+.presenter[data-mode='manual'] {
+  border-left-color: #93b8b3;
+}
+.presenter-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 29px;
+}
+.presenter-controls > strong {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.presenter-controls > div {
+  display: flex;
+  gap: 4px;
+}
+.presenter-controls button {
+  font-size: 10px;
+  padding: 5px 7px;
+}
+.presenter-controls #tour-toggle {
+  color: #152e32;
+  background: #e7db86;
+  border-color: #e7db86;
+  min-width: 69px;
+}
+.presenter #caption {
+  font-size: 17px;
+  line-height: 1.35;
+  height: 76px;
+  margin: 10px 0 8px;
+  overflow: auto;
+  font-weight: 500;
+}
+.evidence {
+  display: grid;
+  grid-template-columns: repeat(var(--facts, 2), minmax(0, 1fr));
+  gap: 8px;
+}
+.evidence > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.evidence > div > span {
+  color: #adc9c8;
+  font-size: 10px;
+  line-height: 1.2;
+  min-height: 24px;
+  overflow-wrap: anywhere;
+}
+.evidence strong {
+  font-size: 21px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+.evidence > div[data-field='mean'] strong {
+  color: var(--yellow);
+}
+.evidence-unit {
+  font-size: 10px;
+  color: #b9cecc;
+  margin: 6px 0 0;
+  line-height: 1.3;
+}
+.tour-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+}
+.tour-progress > span {
+  height: 2px;
+  display: block;
+  background: #edda74;
+  width: 0;
+}

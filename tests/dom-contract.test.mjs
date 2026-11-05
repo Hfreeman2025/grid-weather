@@ -1,2 +1,23 @@
-import{test}from'node:test';import assert from'node:assert/strict';import{readFileSync,readdirSync}from'node:fs';
-test('literal DOM accessors match the actual element type in the shipped page',()=>{const page=readFileSync('index.html','utf8'),ids=new Map([...page.matchAll(/<([a-z][\w:-]*)\b[^>]*\bid=["']([^"']+)["']/gi)].map(m=>[m[2],m[1]]));for(const file of readdirSync('src').filter(f=>f.endsWith('.ts'))){const source=readFileSync('src/'+file,'utf8');for(const m of source.matchAll(/\b(html|svg|button|input)\('([^']+)'\)/g)){const tag=ids.get(m[2]);assert.ok(tag,`${file}: missing ${m[2]}`);if(m[1]==='html')assert.notEqual(tag,'svg',`${file}: html('${m[2]}') receives SVG`);else assert.equal(tag,m[1]=== 'button'?'button':m[1]=== 'input'?'input':'svg',`${file}: ${m[1]}('${m[2]}') receives ${tag}`);}}});
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync, readdirSync } from 'node:fs';
+test('literal DOM accessors match the actual element type in the shipped page', () => {
+  const page = readFileSync('index.html', 'utf8'),
+    ids = new Map(
+      [...page.matchAll(/<([a-z][\w:-]*)\b[^>]*\bid=["']([^"']+)["']/gi)].map((m) => [m[2], m[1]]),
+    );
+  for (const file of readdirSync('src').filter((f) => f.endsWith('.ts'))) {
+    const source = readFileSync('src/' + file, 'utf8');
+    for (const m of source.matchAll(/\b(html|svg|button|input)\('([^']+)'\)/g)) {
+      const tag = ids.get(m[2]);
+      assert.ok(tag, `${file}: missing ${m[2]}`);
+      if (m[1] === 'html') assert.notEqual(tag, 'svg', `${file}: html('${m[2]}') receives SVG`);
+      else
+        assert.equal(
+          tag,
+          m[1] === 'button' ? 'button' : m[1] === 'input' ? 'input' : 'svg',
+          `${file}: ${m[1]}('${m[2]}') receives ${tag}`,
+        );
+    }
+  }
+});

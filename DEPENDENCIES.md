@@ -1,26 +1,31 @@
 # Dependency licences
 
-| Package | Version | Use | Licence |
-| --- | --- | --- | --- |
-| TypeScript | 5.9.3 | Development: strict checking, static compilation, AST lint | Apache-2.0 |
+| Package                      | Version | Use                                       | Licence    |
+| ---------------------------- | ------- | ----------------------------------------- | ---------- |
+| TypeScript                   | 5.9.3   | Strict checking, compilation and AST lint | Apache-2.0 |
+| Prettier                     | 3.9.10  | Source and documentation formatting       | MIT        |
+| Playwright / playwright-core | 1.64.1  | Local browser validation                  | Apache-2.0 |
 
-There are no runtime packages. All visuals are original HTML/CSS/SVG and handwritten WebGL2, with the graphics pipeline in a dedicated worker. Typography now self-hosts IBM Plex latin WOFF2 from @fontsource5.3.0 (SIL OFL1.1). V2 explicitly permits installing the WebKit/Firefox browser test binaries inside the project cache. These are test tools and are not shipped with the app. The optional screenshot harness uses the brief-authorised existing Playwright installation; it is not shipped, installed, or included as a product dependency (Playwright: Apache-2.0).
+There are **zero runtime packages**. Browser binaries are development tools, installed separately and never shipped in the app. `npm run licences` checks installed dependency versions and licences against the lockfile. Approved package licences are MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause and ISC.
 
-Data is licensed separately: Carbon Intensity API, CC BY 4.0; DNO boundaries, NESO Open Data Licence. See README and data/SOURCES.md. The package allowlist is MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause and ISC. `npm run licences` checks every lockfile dependency against installed metadata.
+## Fonts
 
-## V3 data and methods (no new packages or model weights)
+Eight Latin WOFF2 files from **@fontsource 5.3.0** are self-hosted under `public/fonts/`, totalling **165,476 bytes**: IBM Plex Sans 400 normal/italic, 500 and 600; IBM Plex Mono 400 and 600; IBM Plex Sans Condensed 500 and 600. All are **SIL Open Font License 1.1**. Original per-family licence files are retained because their copyright notices differ. `public/fonts/manifest.json` records exact source URLs, sizes and SHA-256 hashes. The licence check verifies every font and original notice. There are no runtime font-service requests.
 
-| Resource | Version / capture | Licence | Size / source |
-| --- | --- | --- | --- |
-| Open-Meteo ECMWF IFS 0.25° fields | 2 Nov 2026; exact times in source manifest | CC BY 4.0; free API non-commercial fair use | 2,393,831 raw JSON bytes across 36 small requests; https://api.open-meteo.com/v1/forecast |
-| NESO preparation data | 2 Nov 2026; regional history plus national actual | CC BY 4.0 | 3,447,902 raw JSON bytes in this manifest; https://api.carbonintensity.org.uk |
-| Frozen NESO forecast | 1 Nov 2026 16:02 UTC | CC BY 4.0 | public/backtest-neso.json; retained original response |
-| Ridge forecaster | Original implementation; source SHA in recorded result | MIT | Computed locally; no pretrained weights, library or hosted API |
-| GPU advection | Original WebGL2 transform-feedback / RK2 implementation | MIT | Compiled with the app; no rendering library |
+## HF badge
 
-Weather data are projected, rotated, interpolated and area-averaged; required Open-Meteo/ECMWF attribution is beside the map and in the README. Open-Meteo server code (AGPL) is not imported or distributed. The V3 implementation downloaded no model, WASM runtime, font or package; the later Plex typography round adds the fonts recorded below. Shared pretrained weights under ~/Personal/.models/ are unused by this piece.
+The supplied HF badge design is © 2026 Harry Freeman and is separate from the code’s MIT licence. Its lettering is outlined IBM Plex Sans Condensed SemiBold, sourced from a SIL OFL 1.1 font; the resulting artwork is not Font Software. The [mark notice](docs/brand/LICENSE.md) retains the supplied attribution and links to the existing font licence. The SVG makes no font-service request.
 
+## Data and methods
 
-## Approved Plex typography round —3November2026
+| Resource                       | Capture                                    | Licence / provenance                                                |
+| ------------------------------ | ------------------------------------------ | ------------------------------------------------------------------- |
+| Open-Meteo ECMWF IFS 0.25°     | 2 November 2026; precise times in manifest | CC BY 4.0; ECMWF attribution; free endpoint non-commercial fair use |
+| NESO carbon preparation inputs | 2 November 2026                            | CC BY 4.0; regional estimates and national actuals                  |
+| Frozen NESO forecast           | 1 November 2026, 16:02 UTC                 | CC BY 4.0; original response retained                               |
+| DNO boundaries                 | Source recorded in `data/SOURCES.md`       | NESO Open Data Licence; simplified for display                      |
+| Ridge and GPU integration code | Original implementation                    | MIT; no pretrained weights or hosted inference                      |
 
-IBM Plex Sans400 normal/italic,500/600 normal; IBM Plex Mono400/600 normal; IBM Plex Sans Condensed500/600 normal. All eight are latin WOFF2 from **@fontsource5.3.0**, **SIL Open Font License1.1**, self-hosted under `public/fonts/`. Total **165,476bytes**. Exact CDN URLs, byte counts and SHA-256 hashes: `public/fonts/manifest.json`. The original per-family licence files are beside the fonts (`OFL-ibm-plex-sans.txt`, `OFL-ibm-plex-mono.txt`, `OFL-ibm-plex-sans-condensed.txt`); their copyright notices differ, so each is retained. `font-display:swap`; three main faces preloaded. No Google Fonts or other runtime font request.
+The preparation manifest `data/v3-sources.json` records 2,393,831 raw weather-response bytes over 36 requests and 3,447,902 NESO-response bytes. These are recorded preparation totals, not a prediction of future download sizes. Compressed public weather responses in `tests/fixtures/meteo/` support offline API-contract tests.
+
+Weather data are projected, rotated, interpolated and area-averaged. Open-Meteo server code is not imported or distributed. Endpoint access is subject to [Open-Meteo's terms](https://open-meteo.com/en/terms); the data licence is [CC BY 4.0](https://open-meteo.com/en/licence). **Supported by National Energy SO Open Data.** See [data sources](data/SOURCES.md).

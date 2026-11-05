@@ -12,6 +12,8 @@ tmp/
 temp/
 .tmp/
 playwright-report/
+screenshots/
+artifacts/
 test-results/
 browser-profiles/
 profiles/
@@ -20,8 +22,15 @@ user-data/
 *.log
 .DS_Store
 
-# Credentials, secrets and personal agent state
+# Credentials and local configuration
 .env*
+.npmrc
+.netrc
+.pypirc
+.ssh/
+id_rsa
+id_ecdsa
+id_ed25519
 keys/
 secrets/
 credentials/
@@ -49,3 +58,6 @@ weights/
 *.pth
 *.tflite
 *.bin
+
+# Generated validation output; curated documentation images live in docs/images
+shots/

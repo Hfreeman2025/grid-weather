@@ -1,44 +1,486 @@
 <!doctype html>
 <html lang="en-GB">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b292f">
-<title>Grid Weather — wind, sun and carbon</title><meta name="description" content="Great Britain’s wind, sunlight and electricity carbon: a GPU weather field and a forecaster trained in your browser, with visible NESO comparisons.">
-<meta property="og:title" content="Grid Weather"><meta property="og:description" content="Real forecast wind and sunlight beneath Britain’s carbon map. Ridge forecasts trained locally, with NESO scores kept visible."><meta property="og:image" content="./og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="./fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="./fonts/ibm-plex-mono-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="./fonts/ibm-plex-sans-condensed-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="./fonts/plex.css">
-<link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css"><script type="module" src="./src/main.js"></script>
-</head>
-<body>
-<a href="#controls" class="skip-link">Skip to time controls</a>
-<header class="masthead"><div><h1>Grid Weather</h1><p>Great Britain’s wind, sun and electricity carbon.</p></div><nav aria-label="Forecast views"><button id="presenter-start">Present forecast</button><a href="#outlook">Outlook</a><a href="#model-lab">Model</a><button id="sources-open">Sources</button></nav></header>
-<div class="data-status" role="status"><span id="connection">Loading saved regional data…</span><span id="status-action">Checking the public API</span><button id="refresh">Refresh</button></div>
-<main>
-<section class="engine" aria-label="Carbon weather broadcast" aria-busy="true" id="engine">
-  <div class="map-scene"><canvas id="wind-canvas" aria-hidden="true" hidden></canvas>
-    <div id="loading-screen" class="loading-screen"><strong>Loading the regional forecast</strong><span>14 regions · half-hour intervals</span></div>
-    <div class="station"><span id="station-name">Regional estimate</span><div><strong id="intensity">—</strong><span>gCO₂/kWh</span></div><span id="intensity-description">Carbon intensity</span></div><button disabled id="details-open">Region details</button>
-    <div class="map-time"><strong id="frame-type">Waiting for data</strong><time id="frame-time">—</time><span id="render-mode">Regional chart</span></div>
-    <div class="map-wrap" id="map-wrap"><svg id="recorded-wind" viewBox="0 0 690 1260" aria-hidden="true"><!-- WIND_RECORDING --></svg><svg id="wind-vectors" viewBox="0 0 690 1260" aria-hidden="true"></svg><svg id="map" xmlns="http://www.w3.org/2000/svg" aria-label="Great Britain’s 14 electricity regions. Select a region."></svg><svg id="map-labels" viewBox="0 0 690 1260" aria-hidden="true"></svg></div>
-    <div class="weather-readout"><span id="weather-reading-label">100 m wind · area mean</span><strong id="weather-reading">Recorded weather loading…</strong><span id="wind-status">Recorded wind replay · GPU preparing</span><span id="weather-source"><!-- WIND_LABEL --></span><a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Weather by Open-Meteo / ECMWF</a></div><span class="sea sea-west" aria-hidden="true">ATLANTIC</span><span class="sea sea-east" aria-hidden="true">NORTH SEA</span>
-    <div class="compass" aria-hidden="true">N<span>│</span></div>
-    <div class="map-key"><span>Carbon intensity</span><div class="scale" aria-hidden="true"></div><div><span>Cleaner · 0</span><span>400+ · more carbon</span></div><div id="weather-key" class="weather-key"><span id="weather-key-label">100 m wind · m/s</span><div class="wind-scale" aria-hidden="true"></div><div><span>0</span><span id="weather-key-high">25+</span></div></div></div>
-    <div id="map-tooltip" class="map-tooltip" hidden aria-hidden="true"></div>
-    <button disabled id="show-values" class="map-values" aria-pressed="true">Hide values</button>
-  </div>
-  <div id="sidebar-dock"><aside id="region-panel" aria-labelledby="region-name"><div class="panel-top"><label for="region-select">Selected region</label><button id="details-close">Close</button></div><select disabled id="region-select" aria-label="Choose electricity region"><option>Loading…</option></select><h2 id="region-name">Regional mix</h2><div class="mix-heading"><h3>Generation mix</h3><time id="mix-time">—</time></div><div id="mix-bar" class="mix-bar" aria-hidden="true"></div><dl id="mix-list" class="mix-list"></dl><div class="best-window"><h3 id="window-heading">Cleanest two hours ahead</h3><strong id="window-time">—</strong><span id="window-detail">Four complete forecast intervals</span><button id="jump-window">Show this window</button></div><p id="window-comparison"></p><p class="panel-note">Forecast estimates, not electricity prices.</p></aside></div>
-  <section id="presenter" class="presenter" aria-label="Presented forecast"><div class="presenter-controls"><strong id="tour-label">Forecast presenter</strong><div><button disabled id="tour-prev" aria-label="Previous forecast caption">Back</button><button disabled id="tour-toggle">Present forecast</button><button disabled id="tour-next" aria-label="Next forecast caption">Next</button></div></div><p tabindex="0" id="caption" role="status" aria-live="polite">Loading a validated forecast and its source values.</p><p id="weather-caption" class="weather-caption">Weather context is loading separately from carbon estimates.</p><div id="evidence" class="evidence" role="list" aria-label="Numbers behind this caption"></div><p id="evidence-unit" class="evidence-unit">Validated regional forecast values</p><div class="tour-progress" aria-hidden="true"><span id="tour-progress"></span></div></section>
-</section>
-<section class="timeline" id="controls" tabindex="-1" aria-label="Forecast time controls"><div class="timeline-controls"><div><button id="play">Play loop</button><button disabled id="now">Now</button><button disabled id="tomorrow">+24 hours</button></div><span id="timeline-description">24 hours back · up to 48 hours ahead</span><div class="weather-layers" aria-label="Map underlay"><button id="layer-wind" aria-pressed="true">Wind</button><button id="layer-sun" aria-pressed="false">Sun</button><button id="layer-carbon" aria-pressed="false">Carbon</button></div><label class="layer-picker">Layer <select id="weather-layer"><option value="wind">Wind</option><option value="sun">Sun</option><option value="carbon">Carbon</option></select></label><label class="speed-label">Speed <select id="speed"><option value="0.5">½×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div><div class="scrub-area"><svg id="sparkline" viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true"></svg><div id="window-band" class="window-band" aria-hidden="true"></div><div id="now-marker" class="now-marker"><span>Now</span></div><div id="cursor" class="cursor" aria-hidden="true"></div><output id="time-tooltip" aria-hidden="true" hidden></output><input id="scrubber" type="range" min="0" max="1" step="any" value="0" aria-label="Forecast time" disabled></div><div id="ticks" class="ticks"></div></section>
-<section id="weather-notes" class="weather-notes"><div><strong id="weather-legend">Wind colour · 0–25+ m/s · 1 second = 20 minutes</strong><span>Virtual tracers in a forecast wind field, not electricity or carbon moving between regions.</span></div><div><button id="refresh-weather">Refresh weather</button><span id="weather-network" role="status">Dated snapshot first. Refresh fetches public weather; no keys.</span></div></section>
-<section id="model-lab" class="model-lab" aria-labelledby="model-heading"><header><div><h2 id="model-heading">Browser forecaster</h2><p>A ridge forecaster you can train on this device. The comparison stays visible when NESO wins.</p></div><button id="train-model">Train here</button></header><div class="model-toolbar"><label>Forecast <select id="model-region"><option value="18">Great Britain</option></select></label><div><button id="model-forward" aria-pressed="true">Next 48 hours</button><button id="model-replay" aria-pressed="false">Held-out replay</button></div></div><p id="model-status" role="status">Recorded calculation loading; browser training follows.</p><p id="model-provenance"></p><p id="model-range"></p><div class="model-key"><span class="ridge-key">Browser ridge</span><span class="neso-key">NESO</span><span id="actual-key" class="actual-key">Held-out target</span></div><svg id="model-plot" viewBox="0 0 1000 266" preserveAspectRatio="none" role="img" aria-label="Browser ridge, NESO and held-out intensity target over time"></svg><div class="model-scores"><div><span>Browser ridge</span><strong id="score-model">—</strong></div><div><span>NESO forecast</span><strong id="score-neso">—</strong></div><div><span>24h persistence</span><strong id="score-persistence">—</strong></div></div><p id="score-samples"></p><p id="score-target"></p><p id="model-validation" class="validation-note"></p><div class="model-explain"><div><h3>Wind sensitivity · hypothetical</h3><label for="wind-hypothesis" id="hypothesis-value">Forecast weather</label><input id="wind-hypothesis" type="range" min="0.5" max="1.5" step="0.05" value="1" disabled><p>Hypothetical wind multiplier. This probes a fitted association; it does not model a causal intervention. NESO’s forecast stays unchanged.</p></div><div><h3>Inside the first forecast hour</h3><div id="model-terms"></div><p id="terms-note"></p></div></div><details><summary>Method, sources and limits</summary><div class="method-copy"><p>Ridge regression fits ten standardized features: 100 m wind speed, capped speed cubed, cloud cover, surface shortwave radiation, temperature, four daily harmonic terms and intensity 24 hours earlier. A positive penalty stabilizes correlated features. The regularization strength is selected on an earlier chronological validation slice; scaling is learned from training rows only. Forecasts beyond 24 hours feed back their own predictions, not future target values.</p><p>The retrospective test freezes the NESO forecast from the source capture shown above. Weather uses an explicitly labelled 48-hour seasonal-persistence forecast because the as-issued weather archive was unavailable during preparation. The forward run uses the weather forecast in its labelled input capture. Regional targets are historical estimates; only the GB target uses national actual intensity. We do not claim an operationally vintaged training archive or causal accuracy.</p><p>Wind vectors come from ECMWF IFS at 100 m above ground, sampled on a 100 km grid through Open-Meteo. Tracer positions advance with second-order midpoint integration on the GPU; trails retain recent positions in two alternating framebuffers. The displayed motion is accelerated 1,200 times. Bearings name where wind comes from; tracers move downwind. Wind means are not weighted by turbine capacity and omit offshore sites beyond the DNO areas. Surface sunlight is the API’s preceding-hour shortwave radiation. This is modelled weather, not observed air-parcel paths.</p><p>Methods: <a href="https://doi.org/10.1080/00401706.1970.10488634">Hoerl &amp; Kennard (1970), ridge regression</a>; <a href="https://registry.khronos.org/webgl/specs/latest/2.0/">WebGL 2 transform feedback</a>; <a href="https://open-meteo.com/en/docs/ecmwf-api">Open-Meteo ECMWF fields</a>. Weather data are <a href="https://open-meteo.com/en/licence">CC BY 4.0</a>; the free API has <a href="https://open-meteo.com/en/terms">non-commercial fair-use terms</a>.</p></div></details></section>
-<section class="correlation-section"><header><h2>What moves together?</h2><p>Area-mean 100 m wind speed, computed on equal-area 10 km samples inside each region. Pearson r across paired hourly source values; n is the actual pair count. Correlation is not causation.</p></header><div class="table-scroll"><table><thead><tr><th>Region</th><th>Wind speed / wind share · r</th><th>Wind speed / intensity · r</th><th>n</th></tr></thead><tbody id="correlation-rows"></tbody></table></div></section>
-<section id="outlook" class="outlook"><header><div><h2>48-hour regional outlook</h2><p>Every region, on the same scale. Shading marks its cleanest complete two hours; means are rounded to whole grams.</p></div><span id="outlook-range">Forecast data loading</span></header><p id="outlook-empty" hidden>No complete future intervals are available. Refresh to check for a new forecast.</p><div id="outlook-list" class="outlook-list"></div></section>
-<section class="understanding"><details id="accessible-regions"><summary>All regions as a table</summary><div class="table-scroll"><table><caption id="table-caption">Regional estimates at the selected time, in gCO₂/kWh.</caption><thead><tr><th scope="col">Region</th><th scope="col">Carbon intensity</th><th scope="col">Wind + solar + hydro</th><th scope="col">Select</th></tr></thead><tbody id="region-table"></tbody></table></div></details><details><summary>How to read this forecast</summary><div class="method-copy"><p>Colour is regional carbon intensity in grams of CO₂ per kilowatt-hour. The weather underlay shows ECMWF 100 m wind or surface sunlight, separately from the carbon colour and numbers. It does not represent wind direction or electricity moving between regions.</p><p>The presenter uses written rules, with no language model. It compares the largest regional improvements and deteriorations with the current source interval, presents wind, solar and gas share changes, and uses the API’s GB aggregate for cleaner-band crossings and the cleanest overnight window (22:00–07:00). Named regions are outlined; national stories outline all 14 regions. The map and timeline move to each caption’s forecast time. Every caption shows its source values, dates and units. Comparisons describe changes in the forecast, rather than their causes. A two-hour mean uses four consecutive half-hours. These are estimates throughout, including the historical part of the timeline.</p><p>Forecast frames are hatched. Display values between half-hours are interpolated. The cleanest window always refers to the remaining forecast after the current reference time; in saved mode, that is the saved snapshot time. It is a carbon signal, not a price forecast. Labels use fixed bands: lower below 100, moderate 100–199, higher 200–299 and very high at 300+ gCO₂/kWh.</p><p>The map uses approximate DNO licence boundaries, simplified to 650 metres. Its geometry is indicative; it is not a connection-boundary lookup.</p></div></details></section>
-</main>
-<footer><span>Harry Freeman · personal project</span><span>National Grid ESO / NESO Carbon Intensity API · CC BY 4.0</span><span>Supported by National Energy SO Open Data</span></footer>
-<dialog id="region-dialog" aria-label="Regional electricity details"></dialog>
-<dialog id="sources-dialog" aria-labelledby="sources-title"><button id="sources-close">Close</button><h2 id="sources-title">Data &amp; forecast notes</h2><p id="source-detail">Waiting for validated data.</p><p id="source-issue"></p><p>Electricity: <a href="https://api.carbonintensity.org.uk/" target="_blank" rel="noreferrer">National Grid ESO Carbon Intensity API, now NESO</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>. Public, keyless regional estimates; refreshed every 15 minutes.</p><p>Boundaries: <a href="https://api.neso.energy/dataset/gis-boundaries-for-gb-dno-license-areas" target="_blank" rel="noreferrer">NESO DNO licence areas, 3 May 2024</a>, <a href="https://www.neso.energy/data-portal/ngeso-open-licence" target="_blank" rel="noreferrer">NESO Open Data Licence</a>. Supported by National Energy SO Open Data.</p><p>Local-only. No accounts, tracking or private sources.</p></dialog>
-<noscript>Grid Weather needs JavaScript for its map, forecast presenter and accessible regional table.</noscript>
-</body></html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#0b292f" />
+    <title>Grid Weather — wind, sun and carbon</title>
+    <meta
+      name="description"
+      content="Great Britain’s wind, sunlight and electricity carbon: a GPU weather field and a forecaster trained in your browser, with visible NESO comparisons."
+    />
+    <meta property="og:title" content="Grid Weather" />
+    <meta
+      property="og:description"
+      content="Real forecast wind and sunlight beneath Britain’s carbon map. Ridge forecasts trained locally, with NESO scores kept visible."
+    />
+    <meta property="og:image" content="./og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link
+      rel="preload"
+      href="./fonts/ibm-plex-sans-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="./fonts/ibm-plex-mono-latin-600-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="./fonts/ibm-plex-sans-condensed-latin-600-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="./fonts/plex.css" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <a href="#controls" class="skip-link">Skip to time controls</a>
+    <header class="masthead">
+      <div>
+        <h1>Grid Weather</h1>
+        <p>Great Britain’s wind, sun and electricity carbon.</p>
+      </div>
+      <nav aria-label="Forecast views">
+        <button id="presenter-start">Present forecast</button><a href="#outlook">Outlook</a
+        ><a href="#model-lab">Model</a><button id="sources-open">Sources</button>
+      </nav>
+    </header>
+    <div class="data-status" role="status">
+      <span id="connection">Loading saved regional data…</span
+      ><span id="status-action">Checking the public API</span><button id="refresh">Refresh</button>
+    </div>
+    <main>
+      <section class="engine" aria-label="Carbon weather broadcast" aria-busy="true" id="engine">
+        <div class="map-scene">
+          <canvas id="wind-canvas" aria-hidden="true" hidden></canvas>
+          <div id="loading-screen" class="loading-screen">
+            <strong>Loading the regional forecast</strong
+            ><span>14 regions · half-hour intervals</span>
+          </div>
+          <div class="station">
+            <span id="station-name">Regional estimate</span>
+            <div><strong id="intensity">—</strong><span>gCO₂/kWh</span></div>
+            <span id="intensity-description">Carbon intensity</span>
+          </div>
+          <button disabled id="details-open">Region details</button>
+          <div class="map-time">
+            <strong id="frame-type">Waiting for data</strong><time id="frame-time">—</time
+            ><span id="render-mode">Regional chart</span>
+          </div>
+          <div class="map-wrap" id="map-wrap">
+            <svg id="recorded-wind" viewBox="0 0 690 1260" aria-hidden="true">
+              <!-- WIND_RECORDING --></svg
+            ><svg id="wind-vectors" viewBox="0 0 690 1260" aria-hidden="true"></svg
+            ><svg
+              id="map"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Great Britain’s 14 electricity regions. Select a region."
+            ></svg
+            ><svg id="map-labels" viewBox="0 0 690 1260" aria-hidden="true"></svg>
+          </div>
+          <div class="weather-readout">
+            <span id="weather-reading-label">100 m wind · area mean</span
+            ><strong id="weather-reading">Recorded weather loading…</strong
+            ><span id="wind-status">Recorded wind replay · GPU preparing</span
+            ><span id="weather-source"><!-- WIND_LABEL --></span
+            ><a href="https://open-meteo.com/" target="_blank" rel="noreferrer"
+              >Weather by Open-Meteo / ECMWF</a
+            >
+          </div>
+          <span class="sea sea-west" aria-hidden="true">ATLANTIC</span
+          ><span class="sea sea-east" aria-hidden="true">NORTH SEA</span>
+          <div class="compass" aria-hidden="true">N<span>│</span></div>
+          <div class="map-key">
+            <span>Carbon intensity</span>
+            <div class="scale" aria-hidden="true"></div>
+            <div><span>Cleaner · 0</span><span>400+ · more carbon</span></div>
+            <div id="weather-key" class="weather-key">
+              <span id="weather-key-label">100 m wind · m/s</span>
+              <div class="wind-scale" aria-hidden="true"></div>
+              <div><span>0</span><span id="weather-key-high">25+</span></div>
+            </div>
+          </div>
+          <div id="map-tooltip" class="map-tooltip" hidden aria-hidden="true"></div>
+          <button disabled id="show-values" class="map-values" aria-pressed="true">
+            Hide values
+          </button>
+        </div>
+        <div id="sidebar-dock">
+          <aside id="region-panel" aria-labelledby="region-name">
+            <div class="panel-top">
+              <label for="region-select">Selected region</label
+              ><button id="details-close">Close</button>
+            </div>
+            <select disabled id="region-select" aria-label="Choose electricity region">
+              <option>Loading…</option>
+            </select>
+            <h2 id="region-name">Regional mix</h2>
+            <div class="mix-heading">
+              <h3>Generation mix</h3>
+              <time id="mix-time">—</time>
+            </div>
+            <div id="mix-bar" class="mix-bar" aria-hidden="true"></div>
+            <dl id="mix-list" class="mix-list"></dl>
+            <div class="best-window">
+              <h3 id="window-heading">Cleanest two hours ahead</h3>
+              <strong id="window-time">—</strong
+              ><span id="window-detail">Four complete forecast intervals</span
+              ><button id="jump-window">Show this window</button>
+            </div>
+            <p id="window-comparison"></p>
+            <p class="panel-note">Forecast estimates, not electricity prices.</p>
+          </aside>
+        </div>
+        <section id="presenter" class="presenter" aria-label="Presented forecast">
+          <div class="presenter-controls">
+            <strong id="tour-label">Forecast presenter</strong>
+            <div>
+              <button disabled id="tour-prev" aria-label="Previous forecast caption">Back</button
+              ><button disabled id="tour-toggle">Present forecast</button
+              ><button disabled id="tour-next" aria-label="Next forecast caption">Next</button>
+            </div>
+          </div>
+          <p tabindex="0" id="caption" role="status" aria-live="polite">
+            Loading a validated forecast and its source values.
+          </p>
+          <p id="weather-caption" class="weather-caption">
+            Weather context is loading separately from carbon estimates.
+          </p>
+          <div
+            id="evidence"
+            class="evidence"
+            role="list"
+            aria-label="Numbers behind this caption"
+          ></div>
+          <p id="evidence-unit" class="evidence-unit">Validated regional forecast values</p>
+          <div class="tour-progress" aria-hidden="true"><span id="tour-progress"></span></div>
+        </section>
+      </section>
+      <section class="timeline" id="controls" tabindex="-1" aria-label="Forecast time controls">
+        <div class="timeline-controls">
+          <div>
+            <button id="play">Play loop</button><button disabled id="now">Now</button
+            ><button disabled id="tomorrow">+24 hours</button>
+          </div>
+          <span id="timeline-description">24 hours back · up to 48 hours ahead</span>
+          <div class="weather-layers" aria-label="Map underlay">
+            <button id="layer-wind" aria-pressed="true">Wind</button
+            ><button id="layer-sun" aria-pressed="false">Sun</button
+            ><button id="layer-carbon" aria-pressed="false">Carbon</button>
+          </div>
+          <label class="layer-picker"
+            >Layer
+            <select id="weather-layer">
+              <option value="wind">Wind</option>
+              <option value="sun">Sun</option>
+              <option value="carbon">Carbon</option>
+            </select></label
+          ><label class="speed-label"
+            >Speed
+            <select id="speed">
+              <option value="0.5">½×</option>
+              <option value="1" selected>1×</option>
+              <option value="2">2×</option>
+            </select></label
+          >
+        </div>
+        <div class="scrub-area">
+          <svg
+            id="sparkline"
+            viewBox="0 0 1000 60"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          ></svg>
+          <div id="window-band" class="window-band" aria-hidden="true"></div>
+          <div id="now-marker" class="now-marker"><span>Now</span></div>
+          <div id="cursor" class="cursor" aria-hidden="true"></div>
+          <output id="time-tooltip" aria-hidden="true" hidden></output
+          ><input
+            id="scrubber"
+            type="range"
+            min="0"
+            max="1"
+            step="any"
+            value="0"
+            aria-label="Forecast time"
+            disabled
+          />
+        </div>
+        <div id="ticks" class="ticks"></div>
+      </section>
+      <section id="weather-notes" class="weather-notes">
+        <div>
+          <strong id="weather-legend">Wind colour · 0–25+ m/s · 1 second = 20 minutes</strong
+          ><span
+            >Virtual tracers in a forecast wind field, not electricity or carbon moving between
+            regions.</span
+          >
+        </div>
+        <div>
+          <button id="refresh-weather">Refresh weather</button
+          ><span id="weather-network" role="status"
+            >Dated snapshot first. Refresh fetches public weather; no keys.</span
+          >
+        </div>
+      </section>
+      <section id="model-lab" class="model-lab" aria-labelledby="model-heading">
+        <header>
+          <div>
+            <h2 id="model-heading">Browser forecaster</h2>
+            <p>
+              A ridge forecaster you can train on this device. The comparison stays visible when
+              NESO wins.
+            </p>
+          </div>
+          <button id="train-model">Train here</button>
+        </header>
+        <div class="model-toolbar">
+          <label
+            >Forecast
+            <select id="model-region">
+              <option value="18">Great Britain</option>
+            </select></label
+          >
+          <div>
+            <button id="model-forward" aria-pressed="true">Next 48 hours</button
+            ><button id="model-replay" aria-pressed="false">Held-out replay</button>
+          </div>
+        </div>
+        <p id="model-status" role="status">
+          Recorded calculation loading; browser training follows.
+        </p>
+        <p id="model-provenance"></p>
+        <p id="model-range"></p>
+        <div class="model-key">
+          <span class="ridge-key">Browser ridge</span><span class="neso-key">NESO</span
+          ><span id="actual-key" class="actual-key">Held-out target</span>
+        </div>
+        <svg
+          id="model-plot"
+          viewBox="0 0 1000 266"
+          preserveAspectRatio="none"
+          role="img"
+          aria-label="Browser ridge, NESO and held-out intensity target over time"
+        ></svg>
+        <div class="model-scores">
+          <div><span>Browser ridge</span><strong id="score-model">—</strong></div>
+          <div><span>NESO forecast</span><strong id="score-neso">—</strong></div>
+          <div><span>24h persistence</span><strong id="score-persistence">—</strong></div>
+        </div>
+        <p id="score-samples"></p>
+        <p id="score-target"></p>
+        <p id="model-validation" class="validation-note"></p>
+        <div class="model-explain">
+          <div>
+            <h3>Wind sensitivity · hypothetical</h3>
+            <label for="wind-hypothesis" id="hypothesis-value">Forecast weather</label
+            ><input
+              id="wind-hypothesis"
+              type="range"
+              min="0.5"
+              max="1.5"
+              step="0.05"
+              value="1"
+              disabled
+            />
+            <p>
+              Hypothetical wind multiplier. This probes a fitted association; it does not model a
+              causal intervention. NESO’s forecast stays unchanged.
+            </p>
+          </div>
+          <div>
+            <h3>Inside the first forecast hour</h3>
+            <div id="model-terms"></div>
+            <p id="terms-note"></p>
+          </div>
+        </div>
+        <details>
+          <summary>Method, sources and limits</summary>
+          <div class="method-copy">
+            <p>
+              Ridge regression fits ten standardized features: 100 m wind speed, capped speed cubed,
+              cloud cover, surface shortwave radiation, temperature, four daily harmonic terms and
+              intensity 24 hours earlier. A positive penalty stabilizes correlated features. The
+              regularization strength is selected on an earlier chronological validation slice;
+              scaling is learned from training rows only. Forecasts beyond 24 hours feed back their
+              own predictions, not future target values.
+            </p>
+            <p>
+              The retrospective test freezes the NESO forecast from the source capture shown above.
+              Weather uses an explicitly labelled 48-hour seasonal-persistence forecast because the
+              as-issued weather archive was unavailable during preparation. The forward run uses the
+              weather forecast in its labelled input capture. Regional targets are historical
+              estimates; only the GB target uses national actual intensity. We do not claim an
+              operationally vintaged training archive or causal accuracy.
+            </p>
+            <p>
+              Wind vectors come from ECMWF IFS at 100 m above ground, sampled on a 100 km grid
+              through Open-Meteo. Tracer positions advance with second-order midpoint integration on
+              the GPU; trails retain recent positions in two alternating framebuffers. The displayed
+              motion is accelerated 1,200 times. Bearings name where wind comes from; tracers move
+              downwind. Wind means are not weighted by turbine capacity and omit offshore sites
+              beyond the DNO areas. Surface sunlight is the API’s preceding-hour shortwave
+              radiation. This is modelled weather, not observed air-parcel paths.
+            </p>
+            <p>
+              Methods:
+              <a href="https://doi.org/10.1080/00401706.1970.10488634"
+                >Hoerl &amp; Kennard (1970), ridge regression</a
+              >;
+              <a href="https://registry.khronos.org/webgl/specs/latest/2.0/"
+                >WebGL 2 transform feedback</a
+              >; <a href="https://open-meteo.com/en/docs/ecmwf-api">Open-Meteo ECMWF fields</a>.
+              Weather data are <a href="https://open-meteo.com/en/licence">CC BY 4.0</a>; the free
+              API has <a href="https://open-meteo.com/en/terms">non-commercial fair-use terms</a>.
+            </p>
+          </div>
+        </details>
+      </section>
+      <section class="correlation-section">
+        <header>
+          <h2>What moves together?</h2>
+          <p>
+            Area-mean 100 m wind speed, computed on equal-area 10 km samples inside each region.
+            Pearson r across paired hourly source values; n is the actual pair count. Correlation is
+            not causation.
+          </p>
+        </header>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Region</th>
+                <th>Wind speed / wind share · r</th>
+                <th>Wind speed / intensity · r</th>
+                <th>n</th>
+              </tr>
+            </thead>
+            <tbody id="correlation-rows"></tbody>
+          </table>
+        </div>
+      </section>
+      <section id="outlook" class="outlook">
+        <header>
+          <div>
+            <h2>48-hour regional outlook</h2>
+            <p>
+              Every region, on the same scale. Shading marks its cleanest complete two hours; means
+              are rounded to whole grams.
+            </p>
+          </div>
+          <span id="outlook-range">Forecast data loading</span>
+        </header>
+        <p id="outlook-empty" hidden>
+          No complete future intervals are available. Refresh to check for a new forecast.
+        </p>
+        <div id="outlook-list" class="outlook-list"></div>
+      </section>
+      <section class="understanding">
+        <details id="accessible-regions">
+          <summary>All regions as a table</summary>
+          <div class="table-scroll">
+            <table>
+              <caption id="table-caption">
+                Regional estimates at the selected time, in gCO₂/kWh.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Region</th>
+                  <th scope="col">Carbon intensity</th>
+                  <th scope="col">Wind + solar + hydro</th>
+                  <th scope="col">Select</th>
+                </tr>
+              </thead>
+              <tbody id="region-table"></tbody>
+            </table>
+          </div>
+        </details>
+        <details>
+          <summary>How to read this forecast</summary>
+          <div class="method-copy">
+            <p>
+              Colour is regional carbon intensity in grams of CO₂ per kilowatt-hour. The weather
+              underlay shows ECMWF 100 m wind or surface sunlight, separately from the carbon colour
+              and numbers. It does not represent wind direction or electricity moving between
+              regions.
+            </p>
+            <p>
+              The presenter uses written rules, with no language model. It compares the largest
+              regional improvements and deteriorations with the current source interval, presents
+              wind, solar and gas share changes, and uses the API’s GB aggregate for cleaner-band
+              crossings and the cleanest overnight window (22:00–07:00). Named regions are outlined;
+              national stories outline all 14 regions. The map and timeline move to each caption’s
+              forecast time. Every caption shows its source values, dates and units. Comparisons
+              describe changes in the forecast, rather than their causes. A two-hour mean uses four
+              consecutive half-hours. These are estimates throughout, including the historical part
+              of the timeline.
+            </p>
+            <p>
+              Forecast frames are hatched. Display values between half-hours are interpolated. The
+              cleanest window always refers to the remaining forecast after the current reference
+              time; in saved mode, that is the saved snapshot time. It is a carbon signal, not a
+              price forecast. Labels use fixed bands: lower below 100, moderate 100–199, higher
+              200–299 and very high at 300+ gCO₂/kWh.
+            </p>
+            <p>
+              The map uses approximate DNO licence boundaries, simplified to 650 metres. Its
+              geometry is indicative; it is not a connection-boundary lookup.
+            </p>
+          </div>
+        </details>
+      </section>
+    </main>
+    <footer>
+      <span>Harry Freeman · personal project</span
+      ><span>National Grid ESO / NESO Carbon Intensity API · CC BY 4.0</span
+      ><span>Supported by National Energy SO Open Data</span>
+    </footer>
+    <dialog id="region-dialog" aria-label="Regional electricity details"></dialog>
+    <dialog id="sources-dialog" aria-labelledby="sources-title">
+      <button id="sources-close">Close</button>
+      <h2 id="sources-title">Data &amp; forecast notes</h2>
+      <p id="source-detail">Waiting for validated data.</p>
+      <p id="source-issue"></p>
+      <p>
+        Electricity:
+        <a href="https://api.carbonintensity.org.uk/" target="_blank" rel="noreferrer"
+          >National Grid ESO Carbon Intensity API, now NESO</a
+        >,
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer"
+          >CC BY 4.0</a
+        >. Public, keyless regional estimates; refreshed every 15 minutes.
+      </p>
+      <p>
+        Boundaries:
+        <a
+          href="https://api.neso.energy/dataset/gis-boundaries-for-gb-dno-license-areas"
+          target="_blank"
+          rel="noreferrer"
+          >NESO DNO licence areas, 3 May 2024</a
+        >,
+        <a
+          href="https://www.neso.energy/data-portal/ngeso-open-licence"
+          target="_blank"
+          rel="noreferrer"
+          >NESO Open Data Licence</a
+        >. Supported by National Energy SO Open Data.
+      </p>
+      <p>Local-only. No accounts, tracking or private sources.</p>
+    </dialog>
+    <noscript
+      >Grid Weather needs JavaScript for its map, forecast presenter and accessible regional
+      table.</noscript
+    >
+  </body>
+</html>

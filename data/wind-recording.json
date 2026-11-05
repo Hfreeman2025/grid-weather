@@ -1,0 +1,10 @@
+{
+  "computedAt": "2026-11-05T20:00:22.001Z",
+  "sourceCapturedAt": "2026-11-02T14:50:51.367Z",
+  "fieldAt": "2026-11-02T15:00:00.000Z",
+  "traces": 477,
+  "animatedTracers": 189,
+  "method": "CPU explicit midpoint reference, 300-second steps in one fixed forecast field; recorded playback at 1200×. Live GPU uses the same method.",
+  "milliseconds": 31.03616600000001,
+  "sourceSHA256": "bdbc6a72d476da6c7ebe07d8a78675dc0fc19ff5ef517683357ea06ec67371cd"
+}

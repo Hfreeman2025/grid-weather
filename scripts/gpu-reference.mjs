@@ -1,1 +1,28 @@
-export async function referenceGPU(p){return await p.evaluate(async()=>{const c=document.createElement('canvas'),gl=c.getContext('webgl2',{failIfMajorPerformanceCaveat:true});if(!gl)return{available:false};const{createWindGPU}=await import('./src/wind-gpu.js'),states=new Float32Array(64*4);for(let i=0;i<64;i++)states.set([.5,.5,0,.5],i*4);const g=createWindGPU(gl,64,{nx:2,ny:2,x0:0,y0:0,step:100},states);g.field(new Float32Array([0,5,0,0,20,5,0,0,0,5,0,0,20,5,0,0]));g.step(1000,0);const midpoint=await g.inspect(1);g.field(new Float32Array([10,0,0,0,10,0,0,0,10,0,0,0,10,0,0,0]));g.step(1000,0);const constant=await g.inspect(1),error=gl.getError();const ext=navigator.userAgent.includes('Chrome')?gl.getExtension('WEBGL_debug_renderer_info'):null;return{available:true,midpoint,constant,error,renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};});}
+export async function referenceGPU(p) {
+  return await p.evaluate(async () => {
+    const c = document.createElement('canvas'),
+      gl = c.getContext('webgl2', { failIfMajorPerformanceCaveat: true });
+    if (!gl) return { available: false };
+    const { createWindGPU } = await import('./src/wind-gpu.js'),
+      states = new Float32Array(64 * 4);
+    for (let i = 0; i < 64; i++) states.set([0.5, 0.5, 0, 0.5], i * 4);
+    const g = createWindGPU(gl, 64, { nx: 2, ny: 2, x0: 0, y0: 0, step: 100 }, states);
+    g.field(new Float32Array([0, 5, 0, 0, 20, 5, 0, 0, 0, 5, 0, 0, 20, 5, 0, 0]));
+    g.step(1000, 0);
+    const midpoint = await g.inspect(1);
+    g.field(new Float32Array([10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0]));
+    g.step(1000, 0);
+    const constant = await g.inspect(1),
+      error = gl.getError();
+    const ext = navigator.userAgent.includes('Chrome')
+      ? gl.getExtension('WEBGL_debug_renderer_info')
+      : null;
+    return {
+      available: true,
+      midpoint,
+      constant,
+      error,
+      renderer: ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER),
+    };
+  });
+}

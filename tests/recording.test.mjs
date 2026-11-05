@@ -1,0 +1,77 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { parseExperiment } from '../src/experiment.ts';
+import { parseResults } from '../src/model-results.ts';
+import { fitAll } from '../src/forecaster.ts';
+import { parseWeather } from '../src/weather.ts';
+import { parseBoundaries } from '../src/geometry.ts';
+import { areaWeather } from '../src/area-weather.ts';
+import { weatherStories, regionalAt } from '../src/weather-stories.ts';
+import { parseArchive } from '../src/data.ts';
+const read = (f) => JSON.parse(readFileSync(new URL('../' + f, import.meta.url)));
+test('recorded calculation is produced by the same real model and every series has 48 forward hours', () => {
+  const data = parseExperiment(read('public/experiment.json')),
+    recorded = read('public/model-recording.json'),
+    live = fitAll(data);
+  assert.equal(recorded.comparisonIssuedAt, new Date(data.cutoff).toISOString());
+  assert.equal(recorded.backtestWeather, data.backtestWeather);
+  assert.equal(live.length, 15);
+  assert.ok(live.every((r) => r.forecast.length === 48));
+  assert.equal(recorded.results.length, live.length);
+  for (const f of live) {
+    const old = recorded.results.find((r) => r.id === f.id);
+    assert.equal(f.mae, old.mae);
+    assert.equal(f.nesoMAE, old.nesoMAE);
+    for (let i = 0; i < f.forecast.length; i++) {
+      assert.equal(f.forecast[i].at, old.forecast[i].at);
+      assert.ok(Math.abs(f.forecast[i].value - old.forecast[i].value) < 1e-10);
+      for (let j = 0; j < 10; j++)
+        assert.ok(Math.abs(f.forecast[i].terms[j] - old.forecast[i].terms[j]) < 1e-10);
+    }
+    assert.equal(f.testN, f.test.length);
+  }
+  const hash = createHash('sha256');
+  for (const f of ['src/ridge.ts', 'src/forecaster.ts', 'src/experiment.ts'])
+    hash.update(readFileSync(new URL('../' + f, import.meta.url)));
+  assert.equal(hash.digest('hex'), recorded.sourceSHA256);
+  assert.equal(parseResults(recorded.results).length, 15);
+});
+test('recorded results reject tampered counts, invalid forecast values and malformed models', () => {
+  for (const mutate of [
+    (a) => a[0].testN++,
+    (a) => (a[0].forecast[0].value = NaN),
+    (a) => (a[0].model = { means: [], scales: [], coefficients: [], intercept: 0, lambda: 1 }),
+  ]) {
+    const a = read('public/model-recording.json').results;
+    mutate(a);
+    assert.throws(() => parseResults(a));
+  }
+});
+test('real weather stories cite derived area means and exact NESO shares, and never extrapolate', () => {
+  const grid = parseWeather(read('public/weather.json')),
+    boundaries = parseBoundaries(read('public/boundaries.json')),
+    rows = areaWeather(grid, boundaries).rows,
+    data = parseArchive(read('public/snapshot.json'), 'offline'),
+    tour = weatherStories(data.frames, rows, data.anchor);
+  assert.ok(tour.some((s) => s.kind === 'weather-wind'));
+  assert.ok(tour.some((s) => s.kind === 'weather-sun'));
+  for (const s of tour) {
+    assert.ok(s.at > data.anchor);
+    assert.ok(s.highlights.includes(s.region));
+    for (const e of s.evidence) {
+      if (e.field === 'windSpeed' || e.field === 'sunlight')
+        assert.equal(e.value, regionalAt(rows, e.at, e.region)[e.field === 'windSpeed' ? 0 : 4]);
+      else
+        assert.equal(
+          e.value,
+          data.frames.find((f) => f.from === e.at).regions.find((r) => r.id === e.region).mix[
+            e.field
+          ],
+        );
+    }
+  }
+  assert.equal(regionalAt(rows, grid.times.at(-1) + 1, 1), null);
+  assert.equal(regionalAt(rows, grid.times[0] - 1, 1), null);
+});
